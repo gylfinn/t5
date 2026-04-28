@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+<html lang="is">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Raid Leiðbeiningar — Tempest Keep & Serpentshrine Cavern | TBC Anniversary</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0e15;
+    --bg-elev: #11151c;
+    --card: #161b22;
+    --card-hover: #1c2128;
+    --border: rgba(212, 160, 23, 0.12);
+    --border-strong: rgba(212, 160, 23, 0.35);
+    --text: #e6e6e6;
+    --text-dim: #9ca3af;
+    --text-muted: #6b7280;
+    --gold: #f4b829;
+    --gold-dim: #d4a017;
+    --gold-deep: #8a6b0d;
+    --fire: #ff7b30;
+    --tank: #3b82c4;
+    --healer: #4cb050;
+    --dps: #c44141;
+    --phase: #a78bfa;
+    --warn: #f59e0b;
+    --info: #60a5fa;
+    --tip: #34d399;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 15px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Reading progress bar */
+  .progress {
+    position: fixed; top: 0; left: 0; height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--fire));
+    width: 0%; z-index: 100;
+    transition: width 0.1s ease-out;
+  }
+
+  /* Sticky nav */
+  nav.toc {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(10, 14, 21, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .toc-inner {
+    max-width: 1200px; margin: 0 auto;
+    padding: 14px 32px;
+    display: flex; align-items: center; gap: 28px;
+    overflow-x: auto;
+  }
+  .toc-brand {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    color: var(--gold);
+    font-size: 16px;
+    letter-spacing: 1px;
+    white-space: nowrap;
+    text-transform: uppercase;
+  }
+  .toc-links {
+    display: flex; gap: 4px; flex-wrap: nowrap;
+  }
+  .toc-links a {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 6px 12px;
+    border-radius: 4px;
+    white-space: nowrap;
+    transition: color 0.15s, background 0.15s;
+  }
+  .toc-links a:hover {
+    color: var(--gold);
+    background: rgba(244, 184, 41, 0.08);
+  }
+  .toc-links .divider {
+    color: var(--text-muted);
+    padding: 6px 4px;
+    font-size: 12px;
+  }
+
+  /* Hero */
+  .hero {
+    position: relative;
+    padding: 100px 32px 80px;
+    text-align: center;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 30% 50%, rgba(244, 184, 41, 0.08), transparent 60%),
+      radial-gradient(ellipse at 70% 50%, rgba(255, 123, 48, 0.06), transparent 60%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    color: var(--gold);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    position: relative;
+  }
+  .hero h1 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(36px, 5vw, 56px);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.1;
+    margin-bottom: 18px;
+    position: relative;
+    background: linear-gradient(180deg, #fff 0%, #d4a017 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hero .subtitle {
+    color: var(--text-dim);
+    font-size: 17px;
+    max-width: 640px;
+    margin: 0 auto 36px;
+    position: relative;
+  }
+  .pills {
+    display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;
+    position: relative;
+  }
+  .pill {
+    background: rgba(244, 184, 41, 0.08);
+    border: 1px solid var(--border-strong);
+    color: var(--gold);
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  /* Container */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* Section divider with title */
+  .raid-section {
+    padding: 72px 0 32px;
+  }
+  .raid-header {
+    margin-bottom: 36px;
+    border-left: 3px solid var(--gold);
+    padding: 4px 0 4px 20px;
+  }
+  .raid-header .label {
+    color: var(--gold);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .raid-header h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 38px;
+    color: #fff;
+    margin-bottom: 8px;
+    line-height: 1.15;
+  }
+  .raid-header .raid-meta {
+    color: var(--text-dim);
+    font-size: 14px;
+  }
+
+  /* Raid intro card */
+  .raid-intro {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-bottom: 36px;
+    line-height: 1.7;
+    color: var(--text-dim);
+  }
+  .raid-intro strong { color: var(--text); }
+  .raid-intro .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 16px;
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+  }
+  .raid-intro .info-grid div {
+    font-size: 13px;
+  }
+  .raid-intro .info-grid .k {
+    color: var(--text-muted);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+  }
+  .raid-intro .info-grid .v {
+    color: var(--gold);
+    font-weight: 600;
+  }
+
+  /* Boss card */
+  .boss {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    margin-bottom: 32px;
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .boss:hover {
+    border-color: var(--border-strong);
+  }
+
+  /* Boss header */
+  .boss-head {
+    padding: 28px 32px 24px;
+    border-bottom: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 24px;
+    position: relative;
+    background: linear-gradient(180deg, rgba(244, 184, 41, 0.04), transparent);
+  }
+  .boss-num {
+    font-family: 'Cinzel', serif;
+    font-size: 56px;
+    font-weight: 700;
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--gold-dim);
+    line-height: 0.9;
+    min-width: 70px;
+  }
+  .boss-titles h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 28px;
+    color: #fff;
+    margin-bottom: 6px;
+    line-height: 1.15;
+  }
+  .boss-titles .tagline {
+    color: var(--gold);
+    font-size: 14px;
+    font-style: italic;
+    letter-spacing: 0.3px;
+  }
+  .difficulty {
+    display: flex; flex-direction: column; align-items: flex-end; gap: 6px;
+  }
+  .difficulty .lbl {
+    font-size: 10px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .skulls { display: flex; gap: 3px; }
+  .skull {
+    width: 14px; height: 14px;
+    background: var(--gold-deep);
+    -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2C7.58 2 4 5.58 4 10c0 2.5 1.16 4.73 3 6.19V19a1 1 0 001 1h2v-2h2v2h2v-2h2v2h2a1 1 0 001-1v-2.81c1.84-1.46 3-3.69 3-6.19 0-4.42-3.58-8-8-8zm-3 9a2 2 0 110-4 2 2 0 010 4zm6 0a2 2 0 110-4 2 2 0 010 4z'/></svg>") center/contain no-repeat;
+    mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2C7.58 2 4 5.58 4 10c0 2.5 1.16 4.73 3 6.19V19a1 1 0 001 1h2v-2h2v2h2v-2h2v2h2a1 1 0 001-1v-2.81c1.84-1.46 3-3.69 3-6.19 0-4.42-3.58-8-8-8zm-3 9a2 2 0 110-4 2 2 0 010 4zm6 0a2 2 0 110-4 2 2 0 010 4z'/></svg>") center/contain no-repeat;
+  }
+  .skull.on { background: var(--fire); }
+
+  /* Boss body grid */
+  .boss-body {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 0;
+  }
+  @media (max-width: 760px) {
+    .boss-body { grid-template-columns: 1fr; }
+    .boss-head { grid-template-columns: auto 1fr; }
+    .difficulty { grid-column: 1 / -1; flex-direction: row; justify-content: space-between; align-items: center; }
+  }
+
+  /* Stats sidebar */
+  .stats {
+    background: rgba(0,0,0,0.2);
+    padding: 24px;
+    border-right: 1px solid var(--border);
+    font-size: 13px;
+  }
+  @media (max-width: 760px) {
+    .stats { border-right: none; border-bottom: 1px solid var(--border); }
+  }
+  .stats-title {
+    font-size: 11px;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 700;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .stat-row {
+    display: flex; justify-content: space-between;
+    padding: 7px 0;
+    border-bottom: 1px dashed rgba(255,255,255,0.04);
+  }
+  .stat-row:last-child { border-bottom: none; }
+  .stat-row .k { color: var(--text-muted); }
+  .stat-row .v { color: var(--text); font-weight: 500; }
+
+  /* Boss content */
+  .content {
+    padding: 28px 32px 32px;
+  }
+  .content h4 {
+    font-family: 'Cinzel', serif;
+    font-size: 17px;
+    color: var(--gold);
+    margin: 26px 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+    letter-spacing: 0.4px;
+  }
+  .content h4:first-child { margin-top: 0; }
+  .content p { color: var(--text-dim); margin-bottom: 14px; }
+  .content strong { color: var(--text); font-weight: 600; }
+  .content em { color: var(--gold); font-style: normal; font-weight: 500; }
+
+  /* Mechanic chips */
+  .mech-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 4px; }
+  .mech {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 12px 14px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    border-left: 3px solid var(--gold-dim);
+  }
+  .mech .chip {
+    flex-shrink: 0;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    margin-top: 1px;
+  }
+  .chip.tank { background: rgba(59,130,196,0.15); color: var(--tank); border-left-color: var(--tank); }
+  .chip.raid { background: rgba(196,65,65,0.15); color: var(--dps); }
+  .chip.move { background: rgba(245,158,11,0.15); color: var(--warn); }
+  .chip.dispel { background: rgba(76,176,80,0.15); color: var(--healer); }
+  .chip.interrupt { background: rgba(167,139,250,0.18); color: var(--phase); }
+  .chip.adds { background: rgba(96,165,250,0.15); color: var(--info); }
+  .chip.heal { background: rgba(76,176,80,0.15); color: var(--healer); }
+  .mech .body-text { color: var(--text); font-size: 14px; line-height: 1.5; }
+  .mech .body-text b { color: var(--gold); font-weight: 600; }
+  .mech.tank-m { border-left-color: var(--tank); }
+  .mech.raid-m { border-left-color: var(--dps); }
+  .mech.move-m { border-left-color: var(--warn); }
+  .mech.dispel-m { border-left-color: var(--healer); }
+  .mech.interrupt-m { border-left-color: var(--phase); }
+  .mech.adds-m { border-left-color: var(--info); }
+
+  /* Phase blocks */
+  .phases { display: flex; flex-direction: column; gap: 12px; }
+  .phase-block {
+    background: rgba(167,139,250,0.04);
+    border: 1px solid rgba(167,139,250,0.18);
+    border-radius: 8px;
+    padding: 16px 20px;
+    position: relative;
+  }
+  .phase-block .ph-head {
+    display: flex; gap: 12px; align-items: baseline;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(167,139,250,0.15);
+  }
+  .phase-num {
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--phase);
+    background: rgba(167,139,250,0.15);
+    padding: 3px 12px;
+    border-radius: 4px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .phase-name { color: #fff; font-size: 15px; font-weight: 600; }
+  .phase-block p { font-size: 14px; color: var(--text-dim); margin: 0; }
+  .phase-block p + p { margin-top: 8px; }
+
+  /* Pro tip callout */
+  .callout {
+    margin: 22px 0 6px;
+    padding: 16px 18px 16px 20px;
+    background: linear-gradient(90deg, rgba(244,184,41,0.08), rgba(244,184,41,0.02));
+    border: 1px solid rgba(244,184,41,0.25);
+    border-left: 3px solid var(--gold);
+    border-radius: 8px;
+  }
+  .callout .head {
+    font-family: 'Cinzel', serif;
+    color: var(--gold);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  .callout ul { padding-left: 18px; }
+  .callout li {
+    color: var(--text);
+    margin-bottom: 5px;
+    font-size: 14px;
+    line-height: 1.55;
+  }
+  .callout li::marker { color: var(--gold); }
+
+  /* Loot box */
+  .loot {
+    margin-top: 22px;
+    padding: 14px 18px;
+    background: rgba(76,176,80,0.04);
+    border: 1px solid rgba(76,176,80,0.2);
+    border-radius: 8px;
+    font-size: 14px;
+    color: var(--text-dim);
+    display: flex; gap: 12px; align-items: flex-start;
+  }
+  .loot::before {
+    content: '◆';
+    color: var(--healer);
+    font-size: 18px;
+    line-height: 1;
+    margin-top: 1px;
+  }
+  .loot strong { color: var(--healer); font-weight: 600; }
+
+  /* Resources / general tips */
+  .tips-section { padding: 48px 0 100px; }
+  .tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 18px;
+    margin-top: 22px;
+  }
+  .tips-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 22px 24px;
+  }
+  .tips-card h4 {
+    font-family: 'Cinzel', serif;
+    color: var(--gold);
+    font-size: 16px;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .tips-card ul { list-style: none; padding: 0; }
+  .tips-card li {
+    font-size: 13px;
+    color: var(--text-dim);
+    padding: 5px 0;
+    line-height: 1.55;
+  }
+  .tips-card li::before {
+    content: '▸ ';
+    color: var(--gold);
+    font-weight: bold;
+  }
+  .tips-card strong { color: var(--text); }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 40px 32px 60px;
+    border-top: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 13px;
+    font-style: italic;
+    font-family: 'Cinzel', serif;
+  }
+  footer .closing {
+    color: var(--gold);
+    margin-bottom: 14px;
+    font-size: 16px;
+  }
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+
+<nav class="toc">
+  <div class="toc-inner">
+    <div class="toc-brand">⚔ TBC Anniversary · Phase 2</div>
+    <div class="toc-links">
+      <a href="#tk">The Eye</a>
+      <a href="#alar">Al'ar</a>
+      <a href="#vr">Void Reaver</a>
+      <a href="#solarian">Solarian</a>
+      <a href="#kael">Kael'thas</a>
+      <span class="divider">·</span>
+      <a href="#ssc">SSC</a>
+      <a href="#hydross">Hydross</a>
+      <a href="#lurker">Lurker</a>
+      <a href="#leotheras">Leotheras</a>
+      <a href="#karathress">Karathress</a>
+      <a href="#morogrim">Morogrim</a>
+      <a href="#vashj">Vashj</a>
+      <span class="divider">·</span>
+      <a href="#tips">Ráðleggingar</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-eyebrow">Raid Leiðbeiningar</div>
+  <h1>Tempest Keep<br>&amp; Serpentshrine Cavern</h1>
+  <p class="subtitle">Ítarlegur leiðarvísir fyrir bæði nýju 25-manna raidin sem koma með Phase 2 á TBC Anniversary serverunum þann 14. maí.</p>
+  <div class="pills">
+    <span class="pill">25 manns</span>
+    <span class="pill">Level 70</span>
+    <span class="pill">10 bossar</span>
+    <span class="pill">T5 Tier</span>
+    <span class="pill">Vikulegur Lockout</span>
+  </div>
+</header>
+
+<div class="container">
+
+<!-- TEMPEST KEEP -->
+<section id="tk" class="raid-section">
+  <div class="raid-header">
+    <div class="label">Raid · Hluti I</div>
+    <h2>Tempest Keep: The Eye</h2>
+    <div class="raid-meta">Netherstorm · 4 bossar · Attunement: The Eye Attunement</div>
+  </div>
+
+  <div class="raid-intro">
+    The Eye er kristallinn virki <strong>Kael'thas Sunstrider</strong> sem svífur yfir Netherstorm. Þú flýgur upp á virkið og berst í gegnum fjórar atrennur þangað til þú stendur augliti til auglitis við Sólarprinsinn sjálfan. Fyrir guildi sem eru ný í T5 er mælt með að byrja á Void Reaver til að venjast trash og umhverfi.
+    <div class="info-grid">
+      <div><div class="k">Staðsetning</div><div class="v">Netherstorm</div></div>
+      <div><div class="k">Bossar</div><div class="v">4</div></div>
+      <div><div class="k">Tier loot</div><div class="v">T5 (Verdant Sphere)</div></div>
+      <div><div class="k">Mælt kill order</div><div class="v">VR → Solarian → Al'ar → Kael</div></div>
+    </div>
+  </div>
+
+  <!-- AL'AR -->
+  <article id="alar" class="boss">
+    <div class="boss-head">
+      <div class="boss-num">01</div>
+      <div class="boss-titles">
+        <h3>Al'ar</h3>
+        <div class="tagline">Fönix-guðinn — Phoenix God</div>
+      </div>
+      <div class="difficulty">
+        <span class="lbl">Erfiðleiki</span>
+        <span class="skulls">
+          <span class="skull on"></span><span class="skull on"></span><span class="skull on"></span><span class="skull"></span><span class="skull"></span>
+        </span>
+      </div>
+    </div>
+    <div class="boss-body">
+      <aside class="stats">
+        <div class="stats-title">Quick Facts</div>
+        <div class="stat-row"><span class="k">HP</span><span class="v">~3.5M</span></div>
+        <div class="stat-row"><span class="k">Tegund</span><span class="v">Elemental</span></div>
+        <div class="stat-row"><span class="k">Fasar</span><span class="v">2</span></div>
+        <div class="stat-row"><span class="k">Tankar</span><span class="v">2</span></div>
+        <div class="stat-row"><span class="k">Resistance</span><span class="v">Engin</span></div>
+        <div class="stat-row"><span class="k">Bardagatími</span><span class="v">~7 mín</span></div>
+      </aside>
+      <div class="content">
+        <p>Al'ar er stór fönix sem flýgur á milli fjögurra platforma í herberginu. Bardaginn er í tveimur fösum og krefst mikillar hreyfingar. Þetta er fyrsti boss þar sem positioning og tank-swap koordinasjón skiptir öllu.</p>
+
+        <h4>Mechanics</h4>
+        <div class="mech-list">
+          <div class="mech tank-m"><span class="chip tank">Tank</span><div class="body-text"><b>Flame Buffet</b> — Stafast á tankinn á meðan Al'ar er á jörðinni. Stackast og krefst tank swap.</div></div>
+          <div class="mech raid-m"><span class="chip raid">Raid</span><div class="body-text"><b>Flame Quills</b> — Al'ar flýgur upp í miðjuna og rignir eldi yfir alla platformana. Hlauptu í miðjuna — öruggi staðurinn er undir honum.</div></div>
+          <div class="mech raid-m"><span class="chip raid">Raid</span><div class="body-text"><b>Meteor</b> — Stór skaði og knockback í Fasa 2. Stilltu raidið saman svo skaðinn dreifist.</div></div>
+          <div class="mech adds-m"><span class="chip adds">Adds</span><div class="body-text"><b>Ember Adds</b> — Springa þegar þeir deyja og gera mikinn eldskaða. Off-tankur safnar þeim og dregur frá raidinu fyrir kill.</div></div>
+          <div class="mech move-m"><span class="chip move">Færsla</span><div class="body-text"><b>Dive Bomb</b> — Steypir sér niður á random spot í Fasa 2. Mikill skaði og knockback.</div></div>
+        </div>
+
+        <h4>Strategía</h4>
+        <div class="phases">
+          <div class="phase-block">
+            <div class="ph-head"><span class="phase-num">Fasi 1</span><span class="phase-name">100% → fyrsta dauða</span></div>
+            <p>Al'ar lendir á einni platformu í einu og flýgur svo til þeirrar næstu réttsælis. Tveir tankar skiptast: annar er á platformu þar sem Al'ar er nú, hinn hleypur að næstu og bíður. Þegar Al'ar flýgur, swappar þú. DPS fylgir honum. Á 0% HP í Fasa 1 fellur hann og Fasi 2 byrjar.</p>
+          </div>
+          <div class="phase-block">
+            <div class="ph-head"><span class="phase-num">Fasi 2</span><span class="phase-name">Eftir endurupprisu</span></div>
+            <p>Al'ar er á jörðinni allan tímann. Tankurinn heldur honum í miðjunni. Embers spawnast reglulega — annar tank tekur þá og dregur úr raidinu áður en þeir springa. Eftir Meteor: dreifist út og healers skipta súpunni. Burn niður þangað til hann er dauður.</p>
+          </div>
+        </div>
+
+        <div class="callout">
+          <div class="head">⚡ Lykilatriði</div>
+          <ul>
+            <li>Tveir tankar nauðsynlegir — Flame Buffet stackast hratt</li>
+            <li>Mage eða Hunter sem getur slow-að Embers er gulls ígildi</li>
+            <li>Healers þurfa að gripa Meteor skaða með cooldowns</li>
+            <li>Forðastu eldsprengju á jörðinni eftir Phoenix kill</li>
+          </ul>
+        </div>
+
+        <div class="loot"><div><strong>Loot:</strong> Engir T5 tokens, en Phoenix-Hatched Bracers, Talisman of the Sun King og sjaldgæfan mount: <em>Ashes of Al'ar</em>.</div></div>
+      </div>
+    </div>
+  </article>
+
+  <!-- VOID REAVER -->
+  <article id="vr" class="boss">
+    <div class="boss-head">
+      <div class="boss-num">02</div>
+      <div class="boss-titles">
+        <h3>Void Reaver</h3>
+        <div class="tagline">"Loot Piñata" — auðveldasti boss í T5</div>
+      </div>
+      <div class="difficulty">
+        <span class="lbl">Erfiðleiki</span>
+        <span class="skulls">
+          <span class="skull on"></span><span class="skull on"></span><span class="skull"></span><span class="skull"></span><span class="skull"></span>
+        </span>
+      </div>
+    </div>
+    <div class="boss-body">
+      <aside class="stats">
+        <div class="stats-title">Quick Facts</div>
+        <div class="stat-row"><span class="k">HP</span><span class="v">~4M</span></div>
+        <div class="stat-row"><span class="k">Tegund</span><span class="v">Construct</span></div>
+        <div class="stat-row"><span class="k">Fasar</span><span class="v">1</span></div>
+        <div class="stat-row"><span class="k">Tankar</span><span class="v">1</span></div>
+        <div class="stat-row"><span class="k">Berserk</span><span class="v">10 mín</span></div>
+        <div class="stat-row"><span class="k">Bardagatími</span><span class="v">~5 mín</span></div>
+      </aside>
+      <div class="content">
+        <p>Einfaldasti bossinn í The Eye — oft kallaður "loot piñata". Tank-and-spank með nokkrum mechanics. Frábær fyrsti kill fyrir guild sem er nýtt í The Eye.</p>
+
+        <h4>Mechanics</h4>
+        <div class="mech-list">
+          <div class="mech raid-m"><span class="chip raid">Raid</span><div class="body-text"><b>Pounding</b> — AoE skaði á alla í raidinu á 12 sek fresti (~1300 skaði). Healers þurfa að halda öllum uppi.</div></div>
+          <div class="mech move-m"><span class="chip move">Færsla</span><div class="body-text"><b>Arcane Orb</b> — Skítur orbum á 3 random ranged. Orbinn ferðast hægt — stígðu úr veginum, mikill skaði ef hann hittir.</div></div>
+          <div class="mech tank-m"><span class="chip tank">Tank</span><div class="body-text"><b>Knock Away</b> — Knockback og threat reduction. Tankurinn þarf að taunta strax aftur.</div></div>
+        </div>
+
+        <h4>Strategía</h4>
+        <p>Stilltu allt ranged DPS á 30+ yards radius svo Arcane Orbs hafi rúm til að ferðast og lenda á jörðu án þess að hitta. Melee stendur saman á bakhliðinni. Tankur heldur honum á staðnum (færir hann ekki). Healers skipta sér í þrjú "teymi" — ranged team, melee team, tank team. Burn niður innan 10 mín áður en Berserk virkjast.</p>
+
+        <div class="callout">
+          <div class="head">⚡ Lykilatriði</div>
+          <ul>
+            <li>Aldrei standa kyrr ef þú ert ranged — Orb getur drepið þig</li>
+            <li>Ekki láta Arcane Orb hitta hóp — skaði magnast</li>
+            <li>Tankur þarf að bregðast hratt við Knock Away</li>
+            <li>Æfið ykkur hér áður en þið farið á Solarian eða Kael</li>
+          </ul>
+        </div>
+
+        <div class="loot"><div><strong>Loot:</strong> Þrír T5 shoulder tokens. Einnig epic shield (Bulwark of Ancient Kings), bracers og leggings.</div></div>
+      </div>
+    </div>
+  </article>
+
+  <!-- SOLARIAN -->
+  <article id="solarian" class="boss">
+    <div class="boss-head">
+      <div class="boss-num">03</div>
+      <div class="boss-titles">
+        <h3>High Astromancer Solarian</h3>
+        <div class="tagline">Stjörnufræðingur Sólarprinsins</div>
+      </div>
+      <div class="difficulty">
+        <span class="lbl">Erfiðleiki</span>
+        <span class="skulls">
+          <span class="skull on"></span><span class="skull on"></span><span class="skull on"></span><span class="skull"></span><span class="skull"></span>
+        </span>
+      </div>
+    </div>
+    <div class="boss-body">
+      <aside class="stats">
+        <div class="stats-title">Quick Facts</div>
+        <div class="stat-row"><span class="k">HP</span><span class="v">~1.5M + adds</span></div>
+        <div class="stat-row"><span class="k">Tegund</span><span class="v">Blood Elf</span></div>
+        <div class="stat-row"><span class="k">Fasar</span><span class="v">3</span></div>
+        <div class="stat-row"><span class="k">Tankar</span><span class="v">2</span></div>
+        <div class="stat-row"><span class="k">Resistance</span><span class="v">Engin</span></div>
+        <div class="stat-row"><span class="k">Bardagatími</span><span class="v">~6 mín</span></div>
+      </aside>
+      <div class="content">
+        <p>Þriggja-fasa fight með sterkri trash-líkri Phase 1, teleport mechanic í Phase 2 og burn í Phase 3.</p>
+
+        <h4>Mechanics</h4>
+        <div class="mech-list">
+          <div class="mech move-m"><span class="chip move">Færsla</span><div class="body-text"><b>Wrath of the Astromancer</b> — DoT á random target, springur eftir 6 sek og veldur AoE skaða. Sá sem fær þetta MÁ hlaupa frá raidinu strax.</div></div>
+          <div class="mech raid-m"><span class="chip raid">Raid</span><div class="body-text"><b>Arcane Missiles</b> — Random target, mikill arcane skaði.</div></div>
+          <div class="mech tank-m"><span class="chip tank">Tank</span><div class="body-text"><b>Disarm</b> — Tankurinn missir vopn í 10 sek.</div></div>
+          <div class="mech adds-m"><span class="chip adds">Adds</span><div class="body-text"><b>Solarium Agents</b> (Phase 1) — 3 adds spawnast reglulega: priestar mind controla, warlockar summona Voidwalkers.</div></div>
+          <div class="mech interrupt-m"><span class="chip interrupt">Interrupt</span><div class="body-text"><b>Mind Control</b> frá Priest adds — verður að interrupt-a strax.</div></div>
+        </div>
+
+        <h4>Strategía</h4>
+        <div class="phases">
+          <div class="phase-block">
+            <div class="ph-head"><span class="phase-num">Fasi 1</span><span class="phase-name">100% → 20%</span></div>
+            <p>Tankurinn heldur Solarian. Off-tank tekur Solarium Agents um leið og þeir spawnast. Kill order: Priestar fyrst (interrupt Mind Control), svo Warlockar. Wrath of the Astromancer markar — sá sem er markaður hleypur ÚT úr raidinu strax.</p>
+          </div>
+          <div class="phase-block">
+            <div class="ph-head"><span class="phase-num">Fasi 2</span><span class="phase-name">Split phase</span></div>
+            <p>Solarian hverfur og þrír klón birtast. Aðeins eitt þeirra er alvöru — það hefur health bar fyrir ofan höfuðið. DPS hleypur að réttu og burnir niður.</p>
+          </div>
+          <div class="phase-block">
+            <div class="ph-head"><span class="phase-num">Fasi 3</span><span class="phase-name">Burn</span></div>
+            <p>Hún birtist aftur og enrage-ast. Mikill skaði á tankinn og raidið. Cooldowns út, burn niður.</p>
+          </div>
+        </div>
+
+        <div class="callout">
+          <div class="head">⚡ Lykilatriði</div>
+          <ul>
+            <li>Wrath markari þarf að hlaupa strax — staðsetning skiptir öllu</li>
+            <li>Off-tank verður að vera tilbúinn í Phase 1 fyrir Solarium Agents</li>
+            <li>Decursive eða svipaður addon hjálpar healers að sjá Wrath strax</li>
+            <li>Save Bloodlust/Heroism í Phase 3</li>
+          </ul>
+        </div>
+
+        <div class="loot"><div><strong>Loot:</strong> Þrír T5 chest tokens. Einnig Worldfire (caster trinket), hood og leggings.</div></div>
+      </div>
+    </div>
+  </article>
+
+  <!-- KAEL'THAS -->
+  <article id="kael" class="boss">
+    <div class="boss-head">
+      <div class="boss-num">04</div>
+      <div class="boss-titles">
+        <h3>Kael'thas Sunstrider</h3>
+        <div class="tagline">Sólarprinsinn — Lokaboss The Eye</div>
+      </div>
+      <div class="difficulty">
+        <span class="lbl">Erfiðleiki</span>
+        <span class="skulls">
+          <span class="skull on"></span><span class="skull on"></span><span class="skull on"></span><span class="skull on"></span><span class="skull on"></span>
+        </span>
+      </div>
+    </div>
+    <div class="boss-body">
+      <aside class="stats">
+        <div class="stats-title">Quick Facts</div>
+        <div class="stat-row"><span class="k">HP</span><span class="v">~3M + advisors</span></div>
+        <div class="stat-row"><span class="k">Tegund</span><span class="v">Blood Elf</span></div>
+        <div class="stat-row"><span class="k">Fasar</span><span class="v">5</span></div>
+        <div class="stat-row"><span class="k">Tankar</span><span class="v">3+</span></div>
+        <div class="stat-row"><span class="k">Resistance</span><span class="v">Engin</span></div>
+        <div class="stat-row"><span class="k">Bardagatími</span><span class="v">12-15 mín</span></div>
+      </aside>
+      <div class="content">
+        <p>Lokabossinn í The Eye og einn af flóknustu bossum allrar TBC. Fimm fasar með legendary weapons, mind control, levitation og pyroblast. Búðu þig undir margar nætur progression.</p>
+
+        <h4>Mechanics</h4>
+        <div class="mech-list">
+          <div class="mech adds-m"><span class="chip adds">Adds</span><div class="body-text"><b>Advisors (P1)</b> — Thaladred (fixate), Sanguinar (fear), Capernian (caster), Telonicus (bombs). Drepa í þeirri röð.</div></div>
+          <div class="mech adds-m"><span class="chip adds">Adds</span><div class="body-text"><b>Legendary Weapons (P2)</b> — 7 vopn detta og ráðast á random raid members. Þú þarft að DPSa þau.</div></div>
+          <div class="mech interrupt-m"><span class="chip interrupt">Interrupt</span><div class="body-text"><b>Pyroblast</b> — ~45k skaði. MÁ interrupt-a eða killshield. Raid-killer ef ekki stoppað.</div></div>
+          <div class="mech dispel-m"><span class="chip dispel">Dispel</span><div class="body-text"><b>Mind Control</b> — 3 random raid members. Dispel strax.</div></div>
+          <div class="mech move-m"><span class="chip move">Færsla</span><div class="body-text"><b>Flame Strike</b> — AoE undir folki á jörðinni. Hlauptu út.</div></div>
+          <div class="mech move-m"><span class="chip move">Færsla</span><div class="body-text"><b>Gravity Lapse (P5)</b> — Allir lyftast upp. Forðastu Arcane Spheres í lofti.</div></div>
+        </div>
+
+        <h4>Strategía</h4>
+        <div class="phases">
+          <div class="phase-block">
+            <div class="ph-head"><span class="phase-num">Fasi 1</span><span class="phase-name">Advisors</span></div>
+            <p>Drepðu advisora í þessari röð: Thaladred → Sanguinar → Capernian → Telonicus. Hver hefur sína mechanic. Capernian sérstaklega þarf að interrupt-a constantly. Healers passa Fixate target hjá Thaladred.</p>
+          </div>
+          <div class="phase-block">
+            <div class="ph-head"><span class="phase-num">Fasi 2</span><span class="phase-name">Legendary Weapons</span></div>
+            <p>Sjö legendary weapons koma niður: Cosmic Infuser, Devastation, Infinity Blade, Phaseshift Bulwark, Staff of Disintegration, Warp Slicer, Netherstrand Longbow. Skiptu raidinu í teymi til að DPSa þau. Þau gera mismunandi skaða — focusaðu fastana fyrst.</p>
+          </div>
+          <div class="phase-block">
+            <div class="ph-head"><span class="phase-num">Fasi 3</span><span class="phase-name">Advisors aftur sem ghosts</span></div>
+            <p>Allir fjórir koma aftur sem ghosts samtímis. Tankarnir grípa þá, raid burnir niður. Bloodlust hér ef ekki notað fyrr.</p>
+          </div>
+          <div class="phase-block">
+            <div class="ph-head"><span class="phase-num">Fasi 4</span><span class="phase-name">50% → 0% — Kael sjálfur</span></div>
+            <p>Tank swap þegar Pyroblast er castaður. Mind Control: dispel-a strax. Phoenix add: off-tank tekur, ranged DPSar. Forðastu Flame Strike á jörðinni.</p>
+          </div>
+          <div class="phase-block">
+            <div class="ph-head"><span class="phase-num">Fasi 5</span><span class="phase-name">Gravity Lapse — chaos</span></div>
+            <p>Kael lyftir öllum upp og þú flýgur. Forðastu Arcane Spheres (fljúga um) og DPSa Kael frá lofti. Healers heala frá lofti líka. Endurtekur sig nokkrum sinnum þangað til Kael er dauður.</p>
+          </div>
+        </div>
+
+        <div class="callout">
+          <div class="head">⚡ Lykilatriði</div>
+          <ul>
+            <li>Þetta er progression boss — búðu þig undir margar nætur</li>
+            <li>Interrupters Phase 1 og Phase 4 eru lykilfólk (Mage, Rogue, Warrior, Shaman)</li>
+            <li>Kael MÁ ekki ná að casta Pyroblast án interrupt í Phase 4</li>
+            <li>Save Innervate, Mana Tide og pots fyrir Phase 4-5</li>
+            <li>Allir verða að geta hlaupið undan Flame Strike á 0,5 sek</li>
+          </ul>
+        </div>
+
+        <div class="loot"><div><strong>Loot:</strong> Þrír T5 leg tokens (Verdant Sphere). Einnig legendary weapons sem token drops (eitt af 7 hverja viku).</div></div>
+      </div>
+    </div>
+  </article>
+
+</section>
+
+
+<!-- SERPENTSHRINE CAVERN -->
+<section id="ssc" class="raid-section">
+  <div class="raid-header">
+    <div class="label">Raid · Hluti II</div>
+    <h2>Serpentshrine Cavern</h2>
+    <div class="raid-meta">Coilfang Reservoir, Zangarmarsh · 6 bossar · Attunement: The Mark of Vashj</div>
+  </div>
+
+  <div class="raid-intro">
+    SSC er undir-vatns hellir þar sem <strong>Lady Vashj</strong> hefur byggt sér virki. Sex bossar á leiðinni að henni og hver og einn er mismunandi tegund af áskorun — frá resistance-dansi á Hydross til hreins chaos á Vashj. Vashj er gatekeeper boss með Kael'thas — báðir verða að deyja til að opna Hyjal og Black Temple.
+    <div class="info-grid">
+      <div><div class="k">Staðsetning</div><div class="v">Zangarmarsh</div></div>
+      <div><div class="k">Bossar</div><div class="v">6</div></div>
+      <div><div class="k">Tier loot</div><div class="v">T5 (Vashj's Vial)</div></div>
+      <div><div class="k">Mælt kill order</div><div class="v">Hydross → Lurker → Tidewalker → Karathress → Leotheras → Vashj</div></div>
+    </div>
+  </div>
+
+  <!-- HYDROSS -->
+  <article id="hydross" class="boss">
+    <div class="boss-head">
+      <div class="boss-num">05</div>
+      <div class="boss-titles">
+        <h3>Hydross the Unstable</h3>
+        <div class="tagline">Vatnaelementinn — Stance Dance</div>
+      </div>
+      <div class="difficulty">
+        <span class="lbl">Erfiðleiki</span>
+        <span class="skulls">
+          <span class="skull on"></span><span class="skull on"></span><span class="skull on"></span><span class="skull"></span><span class="skull"></span>
+        </span>
+      </div>
+    </div>
+    <div class="boss-body">
+      <aside class="stats">
+        <div class="stats-title">Quick Facts</div>
+        <div class="stat-row"><span class="k">HP</span><span class="v">~3M</span></div>
+        <div class="stat-row"><span class="k">Tegund</span><span class="v">Water Elemental</span></div>
+        <div class="stat-row"><span class="k">Fasar</span><span class="v">2 (skipta)</span></div>
+        <div class="stat-row"><span class="k">Tankar</span><span class="v">2 (res)</span></div>
+        <div class="stat-row"><span class="k">Resistance</span><span class="v">365 Frost / Nature</span></div>
+        <div class="stat-row"><span class="k">Berserk</span><span class="v">10 mín</span></div>
+      </aside>
+      <div class="content">
+        <p>Fyrsti boss SSC og introduces "stance dance" mechanic. Tveir tankar nauðsynlegir með resistance gear — annar í Frost res, hinn í Nature res. Án res-gears er fight ómögulegur.</p>
+
+        <h4>Mechanics</h4>
+        <div class="mech-list">
+          <div class="mech tank-m"><span class="chip tank">Tank</span><div class="body-text"><b>Frost / Nature Aura</b> — Hydross aura skiptist milli Frost og Nature þegar hann fer yfir línu á jörðinni. Tankurinn þarf rétt resistance gear fyrir hverja phase.</div></div>
+          <div class="mech tank-m"><span class="chip tank">Tank</span><div class="body-text"><b>Mark of Hydross</b> — Stackast á tankinn. Þarf að swappa á transitions áður en stacks verða lethal.</div></div>
+          <div class="mech adds-m"><span class="chip adds">Adds</span><div class="body-text"><b>Transition adds</b> — 4 elementals spawnast við hverja transition. Off-tank þarf að taka þá strax.</div></div>
+        </div>
+
+        <h4>Strategía</h4>
+        <p>Herbergið er skipt með línu á jörðinni. Hydross byrjar í <em>Frost mode</em> — Frost-tank tekur hann. Þegar Mark stackast hátt (~5-6 stacks), færðu hann yfir línuna í Nature mode. Nature-tank tekur við. Við hverja transition spawnast 4 adds — Nature-add eða Frost-add eftir því hvora hliðina þú ert á. Off-tank grípur þá, ranged DPSar þá niður. Halda áfram að dansa fram og til baka þangað til Hydross er dauður.</p>
+
+        <div class="callout">
+          <div class="head">⚡ Lykilatriði</div>
+          <ul>
+            <li>Resistance gear er must — án þess deyr tankur</li>
+            <li>Hreinir transitions skipta öllu — ekki færa of seint</li>
+            <li>Healers þurfa að assignast á tank teams</li>
+            <li>Adds verða að deyja hratt — ranged focus</li>
+          </ul>
+        </div>
+
+        <div class="loot"><div><strong>Loot:</strong> Engir T5 tokens. Cord of Screaming Terrors, Earring of Soulful Meditation, Ring of Lethality o.fl.</div></div>
+      </div>
+    </div>
+  </article>
+
+  <!-- LURKER -->
+  <article id="lurker" class="boss">
+    <div class="boss-head">
+      <div class="boss-num">06</div>
+      <div class="boss-titles">
+        <h3>The Lurker Below</h3>
+        <div class="tagline">Veiðiboss — Cast bobber to start</div>
+      </div>
+      <div class="difficulty">
+        <span class="lbl">Erfiðleiki</span>
+        <span class="skulls">
+          <span class="skull on"></span><span class="skull on"></span><span class="skull on"></span><span class="skull"></span><span class="skull"></span>
+        </span>
+      </div>
+    </div>
+    <div class="boss-body">
+      <aside class="stats">
+        <div class="stats-title">Quick Facts</div>
+        <div class="stat-row"><span class="k">HP</span><span class="v">~3M</span></div>
+        <div class="stat-row"><span class="k">Tegund</span><span class="v">Beast</span></div>
+        <div class="stat-row"><span class="k">Fasar</span><span class="v">2 (skipta)</span></div>
+        <div class="stat-row"><span class="k">Tankar</span><span class="v">2</span></div>
+        <div class="stat-row"><span class="k">Trigger</span><span class="v">Veiðing í polli</span></div>
+        <div class="stat-row"><span class="k">Bardagatími</span><span class="v">~7 mín</span></div>
+      </aside>
+      <div class="content">
+        <p>Skrítinn fishing-boss — þú byrjar bardagann með því að kasta veiðistöng í pollinn í miðjunni. Spout er signature mechanic þessa boss og einn af ólíklegustu hlutum í WoW.</p>
+
+        <h4>Mechanics</h4>
+        <div class="mech-list">
+          <div class="mech move-m"><span class="chip move">Færsla</span><div class="body-text"><b>Spout</b> — Risastór spóla af vatni sem snýst um herbergið. <em>HOPPAÐU Í VATNIÐ</em> til að forðast. One-shot annars.</div></div>
+          <div class="mech raid-m"><span class="chip raid">Raid</span><div class="body-text"><b>Whirl</b> — AoE skaði á alla nálæga með knockback.</div></div>
+          <div class="mech raid-m"><span class="chip raid">Raid</span><div class="body-text"><b>Geyser</b> — Random target, mikill skaði og knockback.</div></div>
+          <div class="mech adds-m"><span class="chip adds">Adds</span><div class="body-text"><b>Submerge</b> (90 sek) — Lurker köfar og 3 hópar af adds spawnast (Coilfang Ambushers og Guardians).</div></div>
+        </div>
+
+        <h4>Strategía</h4>
+        <div class="phases">
+          <div class="phase-block">
+            <div class="ph-head"><span class="phase-num">Pull</span><span class="phase-name">Veiðing</span></div>
+            <p>Einhver veiðir í miðjupollinum. Þetta tekur 10-30 sek (random) — Lurker birtist svo úr vatninu.</p>
+          </div>
+          <div class="phase-block">
+            <div class="ph-head"><span class="phase-num">Phase 1</span><span class="phase-name">Lurker á yfirborði</span></div>
+            <p>Tankurinn stendur á aðalplatformunni. Melee dpsar. Ranged stendur á hliðar-platformunum. Þegar Spout byrjar — STÖKKVA Í VATNIÐ. Þegar Spout er búinn, klifruðu upp aftur.</p>
+          </div>
+          <div class="phase-block">
+            <div class="ph-head"><span class="phase-num">Phase 2</span><span class="phase-name">Submerge</span></div>
+            <p>Lurker köfar. Adds spawnast á þremur platformum. Off-tank og main tank skipta sér. Healers fylgja tönkum. Drepið alla adds áður en Lurker birtist aftur.</p>
+          </div>
+        </div>
+
+        <div class="callout">
+          <div class="head">⚡ Lykilatriði</div>
+          <ul>
+            <li>Spout = stökk eða dauður</li>
+            <li>Healers sem leyfa raid að ná Whirl drepa raid</li>
+            <li>Tank assignment á submerge phase er lykill</li>
+            <li>Sá sem veiðir á að vera einhver með veiðiskill</li>
+          </ul>
+        </div>
+
+        <div class="loot"><div><strong>Loot:</strong> Engir T5 tokens. Glove of the Deftly Set, Earthen Soul Talisman, Fang of the Leviathan.</div></div>
+      </div>
+    </div>
+  </article>
+
+  <!-- LEOTHERAS -->
+  <article id="leotheras" class="boss">
+    <div class="boss-head">
+      <div class="boss-num">07</div>
+      <div class="boss-titles">
+        <h3>Leotheras the Blind</h3>
+        <div class="tagline">Demon/Elf hybrid — Inner Demons</div>
+      </div>
+      <div class="difficulty">
+        <span class="lbl">Erfiðleiki</span>
+        <span class="skulls">
+          <span class="skull on"></span><span class="skull on"></span><span class="skull on"></span><span class="skull on"></span><span class="skull"></span>
+        </span>
+      </div>
+    </div>
+    <div class="boss-body">
+      <aside class="stats">
+        <div class="stats-title">Quick Facts</div>
+        <div class="stat-row"><span class="k">HP</span><span class="v">~2.5M</span></div>
+        <div class="stat-row"><span class="k">Tegund</span><span class="v">Demon/Elf</span></div>
+        <div class="stat-row"><span class="k">Fasar</span><span class="v">2 (skipta)</span></div>
+        <div class="stat-row"><span class="k">Tankar</span><span class="v">Warrior + Warlock</span></div>
+        <div class="stat-row"><span class="k">Resistance</span><span class="v">Engin</span></div>
+        <div class="stat-row"><span class="k">Bardagatími</span><span class="v">~8 mín</span></div>
+      </aside>
+      <div class="content">
+        <p>Þessi gerir mismunandi hluti eftir form. Skiptist í Elf-form og Demon-form. Krefst <em>warlock-tank</em> sem er sjaldan séð í raidum.</p>
+
+        <h4>Mechanics</h4>
+        <div class="mech-list">
+          <div class="mech move-m"><span class="chip move">Færsla</span><div class="body-text"><b>Whirlwind (Elf)</b> — Whirlwindar í 10 sek og hreyfir sig random. Hlauptu frá honum.</div></div>
+          <div class="mech raid-m"><span class="chip raid">Raid</span><div class="body-text"><b>Chaos Blast (Demon)</b> — Casttast á random target, ~5k shadow skaði.</div></div>
+          <div class="mech adds-m"><span class="chip adds">Adds</span><div class="body-text"><b>Inner Demon</b> — 5 random raid members fá Insidious Whisper. Hver klónast í demon sem þú þarft að drepa á 60 sek annars MC.</div></div>
+        </div>
+
+        <h4>Strategía</h4>
+        <div class="phases">
+          <div class="phase-block">
+            <div class="ph-head"><span class="phase-num">Phase 1</span><span class="phase-name">Elf form</span></div>
+            <p>Warrior-tankur tekur Leotheras með Defensive Stance. Hann gerir Whirlwind á random tímum — allir hlaupa BURT. Eftir 60 sek breytist hann í Demon Form.</p>
+          </div>
+          <div class="phase-block">
+            <div class="ph-head"><span class="phase-num">Phase 2</span><span class="phase-name">Demon form</span></div>
+            <p>Warlock-tank (já, warlock með Soul Link og Voidwalker) tekur Demon-form Leotheras. Hann gefur Chaos Blast skaða og 5 manns fá Insidious Whisper. Hver og einn sem fær whisper þarf að DPSa eigin Inner Demon niður á 60 sek. Skiptir aftur í Elf form eftir tíma.</p>
+          </div>
+          <div class="phase-block">
+            <div class="ph-head"><span class="phase-num">Phase 3</span><span class="phase-name">15% — Final form</span></div>
+            <p>Á 15% kemur Final Form (mixed) — burn niður með Bloodlust.</p>
+          </div>
+        </div>
+
+        <div class="callout">
+          <div class="head">⚡ Lykilatriði</div>
+          <ul>
+            <li>Warlock með Soul Link er kleinpunktur fyrir Phase 2</li>
+            <li>Inner Demons skiptast á alla — allir verða að geta DPSað eigin demon</li>
+            <li>Tank swap milli phases er nauðsyn</li>
+            <li>Whirlwind = hlaupa eða dauður</li>
+          </ul>
+        </div>
+
+        <div class="loot"><div><strong>Loot:</strong> Þrír T5 helmet tokens. Einnig Leggings of the Seventh Circle, Stanchion of Primal Instinct, Coral-Barbed Spaulders.</div></div>
+      </div>
+    </div>
+  </article>
+
+  <!-- KARATHRESS -->
+  <article id="karathress" class="boss">
+    <div class="boss-head">
+      <div class="boss-num">08</div>
+      <div class="boss-titles">
+        <h3>Fathom-Lord Karathress</h3>
+        <div class="tagline">Council fight — Naga lord og 3 advisors</div>
+      </div>
+      <div class="difficulty">
+        <span class="lbl">Erfiðleiki</span>
+        <span class="skulls">
+          <span class="skull on"></span><span class="skull on"></span><span class="skull on"></span><span class="skull on"></span><span class="skull"></span>
+        </span>
+      </div>
+    </div>
+    <div class="boss-body">
+      <aside class="stats">
+        <div class="stats-title">Quick Facts</div>
+        <div class="stat-row"><span class="k">HP</span><span class="v">~2M + 3×1.5M</span></div>
+        <div class="stat-row"><span class="k">Tegund</span><span class="v">Naga (Council)</span></div>
+        <div class="stat-row"><span class="k">Fasar</span><span class="v">4 (kill order)</span></div>
+        <div class="stat-row"><span class="k">Tankar</span><span class="v">4</span></div>
+        <div class="stat-row"><span class="k">Resistance</span><span class="v">Engin</span></div>
+        <div class="stat-row"><span class="k">Bardagatími</span><span class="v">~8 mín</span></div>
+      </aside>
+      <div class="content">
+        <p>Council-fight með fjórum mobs í einu. Karathress og þrír advisors. Þú verður að drepa advisors fyrst — Karathress fær STR fyrir hvern lifandi advisor.</p>
+
+        <h4>The Council</h4>
+        <div class="mech-list">
+          <div class="mech adds-m"><span class="chip adds">Hunter</span><div class="body-text"><b>Sharkkis</b> — Pet (hyena), Multi-Shot, Hurl. Drepa pet fyrst eða CC.</div></div>
+          <div class="mech adds-m"><span class="chip adds">Shaman</span><div class="body-text"><b>Tidalvess</b> — Frost Shock, Earthbind og Spitfire totems. Eyðið totems strax.</div></div>
+          <div class="mech adds-m"><span class="chip adds">Priest</span><div class="body-text"><b>Caribdis</b> — <em>Heals Karathress!</em> Tidal Surge (knockback), Water Bolt. Interrupts MUST.</div></div>
+          <div class="mech tank-m"><span class="chip tank">Boss</span><div class="body-text"><b>Karathress</b> — Cataclysmic Bolt, Sear Nova. Enrage-ast eftir hvern látinn advisor.</div></div>
+        </div>
+
+        <h4>Strategía</h4>
+        <div class="phases">
+          <div class="phase-block">
+            <div class="ph-head"><span class="phase-num">Phase 1</span><span class="phase-name">Karathress + 3 advisors</span></div>
+            <p>Allir tankarnir taka sína. <em>DPS focus á Caribdis</em> — drepa hyenu Sharkkis fyrst (eða CC). Interrupt Caribdis heals constantly.</p>
+          </div>
+          <div class="phase-block">
+            <div class="ph-head"><span class="phase-num">Phase 2</span><span class="phase-name">+ 2 advisors</span></div>
+            <p>Eftir Caribdis dauðu, focus Tidalvess. Eyða totems um leið og þau spawnast.</p>
+          </div>
+          <div class="phase-block">
+            <div class="ph-head"><span class="phase-num">Phase 3</span><span class="phase-name">+ 1 advisor</span></div>
+            <p>Sharkkis næstur. Pet management heldur áfram.</p>
+          </div>
+          <div class="phase-block">
+            <div class="ph-head"><span class="phase-num">Phase 4</span><span class="phase-name">Karathress einn — Enrage</span></div>
+            <p>Karathress er enraged núna. Tankurinn þarf aukacooldowns. Burn niður með Bloodlust.</p>
+          </div>
+        </div>
+
+        <div class="callout">
+          <div class="head">⚡ Lykilatriði</div>
+          <ul>
+            <li>Caribdis interrupts skipta öllu — fight er ómögulegur án þeirra</li>
+            <li>Tank assignment fyrir hvern advisor er must — pre-assigned fyrir pull</li>
+            <li>Healers verða að assignast — einn healer á tank</li>
+            <li>Bloodlust á Phase 4</li>
+          </ul>
+        </div>
+
+        <div class="loot"><div><strong>Loot:</strong> Þrír T5 glove tokens. Einnig Eye of Magtheridon, Sextant of Unstable Currents, Belt of One-Hundred Deaths.</div></div>
+      </div>
+    </div>
+  </article>
+
+  <!-- MOROGRIM -->
+  <article id="morogrim" class="boss">
+    <div class="boss-head">
+      <div class="boss-num">09</div>
+      <div class="boss-titles">
+        <h3>Morogrim Tidewalker</h3>
+        <div class="tagline">Murloc add-fasi og Watery Grave</div>
+      </div>
+      <div class="difficulty">
+        <span class="lbl">Erfiðleiki</span>
+        <span class="skulls">
+          <span class="skull on"></span><span class="skull on"></span><span class="skull on"></span><span class="skull"></span><span class="skull"></span>
+        </span>
+      </div>
+    </div>
+    <div class="boss-body">
+      <aside class="stats">
+        <div class="stats-title">Quick Facts</div>
+        <div class="stat-row"><span class="k">HP</span><span class="v">~3M</span></div>
+        <div class="stat-row"><span class="k">Tegund</span><span class="v">Giant</span></div>
+        <div class="stat-row"><span class="k">Fasar</span><span class="v">1 + add waves</span></div>
+        <div class="stat-row"><span class="k">Tankar</span><span class="v">2</span></div>
+        <div class="stat-row"><span class="k">Resistance</span><span class="v">Engin</span></div>
+        <div class="stat-row"><span class="k">Bardagatími</span><span class="v">~6 mín</span></div>
+      </aside>
+      <div class="content">
+        <p>Tank-and-spank með murloc-add fasa og Watery Grave mechanic. AoE klassar fá að skína hér.</p>
+
+        <h4>Mechanics</h4>
+        <div class="mech-list">
+          <div class="mech move-m"><span class="chip move">Færsla</span><div class="body-text"><b>Tidal Wave</b> — Frontal cone. Allir framan á MUST forðast eða vera melee á hliðum.</div></div>
+          <div class="mech raid-m"><span class="chip raid">Raid</span><div class="body-text"><b>Watery Grave</b> — 4 random raid members teleportast í pollum á jörðinni — föst í 6 sek og taka skaða.</div></div>
+          <div class="mech raid-m"><span class="chip raid">Raid</span><div class="body-text"><b>Earthquake (25%)</b> — Continuous AoE skaði á alla.</div></div>
+          <div class="mech adds-m"><span class="chip adds">Adds</span><div class="body-text"><b>Tidewalker Lurkers</b> — Á 75%, 50%, 25% spawnast hópur af murloc adds.</div></div>
+        </div>
+
+        <h4>Strategía</h4>
+        <p>Tankurinn heldur Morogrim í einum stað. Allir aðrir standa á sínum spot — pre-assigned. Þegar Watery Grave virkjar, healers heala 4 sem eru í pollunum. Murloc waves — off-tank grípur, AoE niður (Mage Frost Nova / Warlock Seed of Corruption / Hunter Multi-Shot er gulls ígildi). Á 25% byrjar Earthquake — burn fast með Bloodlust.</p>
+
+        <div class="callout">
+          <div class="head">⚡ Lykilatriði</div>
+          <ul>
+            <li>Allir hafa sinn spot — ekki standa á öðrum</li>
+            <li>Watery Grave skaði stackast — heal hratt</li>
+            <li>AoE classes lykill á add waves</li>
+            <li>Save Bloodlust á 25% Earthquake phase</li>
+          </ul>
+        </div>
+
+        <div class="loot"><div><strong>Loot:</strong> T5 wrist tokens. Einnig Glorious Gauntlets of Crestfall, Tidefury Helm.</div></div>
+      </div>
+    </div>
+  </article>
+
+  <!-- VASHJ -->
+  <article id="vashj" class="boss">
+    <div class="boss-head">
+      <div class="boss-num">10</div>
+      <div class="boss-titles">
+        <h3>Lady Vashj</h3>
+        <div class="tagline">Sjávarnornin — Lokaboss og Gatekeeper</div>
+      </div>
+      <div class="difficulty">
+        <span class="lbl">Erfiðleiki</span>
+        <span class="skulls">
+          <span class="skull on"></span><span class="skull on"></span><span class="skull on"></span><span class="skull on"></span><span class="skull on"></span>
+        </span>
+      </div>
+    </div>
+    <div class="boss-body">
+      <aside class="stats">
+        <div class="stats-title">Quick Facts</div>
+        <div class="stat-row"><span class="k">HP</span><span class="v">~4.5M</span></div>
+        <div class="stat-row"><span class="k">Tegund</span><span class="v">Naga</span></div>
+        <div class="stat-row"><span class="k">Fasar</span><span class="v">3</span></div>
+        <div class="stat-row"><span class="k">Tankar</span><span class="v">2-3</span></div>
+        <div class="stat-row"><span class="k">Resistance</span><span class="v">Engin</span></div>
+        <div class="stat-row"><span class="k">Bardagatími</span><span class="v">10-12 mín</span></div>
+      </aside>
+      <div class="content">
+        <p>Lokaboss SSC og einn af þremur gatekeeper bossum (með Kael'thas) sem opna Hyjal og Black Temple. Þrír fasar með shielded phase, kiting og elementals. <em>Phase 2 er fasinn sem drepur guildi.</em></p>
+
+        <h4>Mechanics</h4>
+        <div class="mech-list">
+          <div class="mech tank-m"><span class="chip tank">Tank</span><div class="body-text"><b>Shock Blast (P1)</b> — ~5k frost skaði + interrupt + 2 sek stun. MÁ ekki taka með litlu HP.</div></div>
+          <div class="mech move-m"><span class="chip move">Færsla</span><div class="body-text"><b>Static Charge (P1)</b> — 4 random raid members fá lightning DoT. Spread out.</div></div>
+          <div class="mech adds-m"><span class="chip adds">P2</span><div class="body-text"><b>Tainted Cores</b> — Spawnast í kringum Vashj. Þú þarft að GRIPA og kasta upp á platform til að brjóta skjöldinn.</div></div>
+          <div class="mech adds-m"><span class="chip adds">P2</span><div class="body-text"><b>Tainted Elementals</b> — 4 spawnast á hringnum. Drepa hvern og einn.</div></div>
+          <div class="mech adds-m"><span class="chip adds">P2</span><div class="body-text"><b>Coilfang Striders</b> — Hlaupa að Vashj. <em>MÁ EKKI ná henni</em> eða hún heals fullt. Kite-a þá.</div></div>
+          <div class="mech raid-m"><span class="chip raid">P3</span><div class="body-text"><b>Poison Bolt Volley</b> — AoE shadow skaði á alla.</div></div>
+        </div>
+
+        <h4>Strategía</h4>
+        <div class="phases">
+          <div class="phase-block">
+            <div class="ph-head"><span class="phase-num">Phase 1</span><span class="phase-name">100% → 70%</span></div>
+            <p>Tankurinn heldur Vashj. Forðastu Shock Blast — pre-shield ef hægt. Static Charge: spread out. Entangled players: dispel ef hægt. Burn niður á 70%.</p>
+          </div>
+          <div class="phase-block">
+            <div class="ph-head"><span class="phase-num">Phase 2</span><span class="phase-name">70% → 30% — CHAOS</span></div>
+            <p>Vashj er IMMUNE. Skiptu raidinu í teams:</p>
+            <p><b>Team A/B/C/D:</b> Hver á einum quadrant af herberginu, drepa Tainted Elemental sem spawnar þar.<br>
+            <b>Strider Team:</b> 2-3 hunters/mages kite Striders frá Vashj.<br>
+            <b>Core Throwers:</b> 2-3 manns sem grípa Tainted Cores og kasta upp á platform.<br>
+            <b>Sporebat killers:</b> Ranged DPS focus á flying adds.</p>
+            <p>Ef einhver gerir mistakes (Strider nær Vashj, Core er ekki kastaður í tíma) — það er wipe.</p>
+          </div>
+          <div class="phase-block">
+            <div class="ph-head"><span class="phase-num">Phase 3</span><span class="phase-name">30% → 0%</span></div>
+            <p>Vashj er aftur attackable. Healers full focus. Burn niður. Sporebats og Elementals eru enn að spawna en raidið ætti að vera nógu sterkt núna. Bloodlust hér.</p>
+          </div>
+        </div>
+
+        <div class="callout">
+          <div class="head">⚡ Lykilatriði</div>
+          <ul>
+            <li>Phase 2 krefst margra nátta æfingar — gerðu ekki ráð fyrir kill á fyrstu nótt</li>
+            <li>Voice communication á Discord/Vent skiptir öllu — required</li>
+            <li>Þrjú teymi MEGA mistakes drepa raid: Striders, Cores, Elementals</li>
+            <li>Hunters með Aspect of the Cheetah og Frost Trap = besti Strider kiters</li>
+            <li>Save Bloodlust á Phase 3</li>
+          </ul>
+        </div>
+
+        <div class="loot"><div><strong>Loot:</strong> Þrír T5 leg tokens (Vashj's Vial Remnant). Einnig Glaive of the Pit, Vonhryl Spaulders, Ring of Endless Coil. Drop af <em>Vashj's Vial Remnant</em> framfærir Anetheron quest línu fyrir Hyjal aðgang.</div></div>
+      </div>
+    </div>
+  </article>
+
+</section>
+
+
+<!-- TIPS / RESOURCES -->
+<section id="tips" class="tips-section">
+  <div class="raid-header">
+    <div class="label">Hluti III</div>
+    <h2>Almennar Ráðleggingar</h2>
+    <div class="raid-meta">Consumables, gear og raid leadership</div>
+  </div>
+
+  <div class="tips-grid">
+    <div class="tips-card">
+      <h4>Fyrir Raid Leiðtoga</h4>
+      <ul>
+        <li><strong>Byrjaðu á Void Reaver</strong> til að venjast The Eye trash</li>
+        <li><strong>SSC kill order:</strong> Hydross → Lurker → Tidewalker → Karathress → Leotheras → Vashj</li>
+        <li><strong>The Eye kill order:</strong> Void Reaver → Solarian → Al'ar → Kael</li>
+        <li>Klárið alla 4-5 fyrri bossana á sömu nótt</li>
+        <li>Vashj og Kael fá sína eigin nótt</li>
+        <li><strong>Voice comms</strong> er must fyrir Vashj og Kael</li>
+      </ul>
+    </div>
+
+    <div class="tips-card">
+      <h4>Resistance Krafa</h4>
+      <ul>
+        <li><strong>Hydross:</strong> 365 Frost res + 365 Nature res tankar</li>
+        <li><strong>Leotheras:</strong> Engin krafa, en warlock-tank gear</li>
+        <li><strong>Vashj:</strong> Engin krafa</li>
+        <li><strong>Kael:</strong> Engin krafa, en healers þurfa STA gear</li>
+      </ul>
+    </div>
+
+    <div class="tips-card">
+      <h4>Consumables</h4>
+      <ul>
+        <li><strong>Tankar:</strong> Flask of Fortification, Sharpened Kuna, Major Healing Pots</li>
+        <li><strong>Healers:</strong> Flask of Mighty Restoration, Mana pots, Mana Oil</li>
+        <li><strong>DPS:</strong> Flask of Relentless Assault / Pure Death</li>
+        <li><strong>Allir:</strong> Spicy Crawdad eða Skullfish Soup, Scroll buffs</li>
+      </ul>
+    </div>
+
+    <div class="tips-card">
+      <h4>Loot Priority Suggestion</h4>
+      <ul>
+        <li><strong>T5 helmet</strong> (Solarian/Leotheras) → tankar fyrst</li>
+        <li><strong>T5 chest</strong> (Solarian) → tankar</li>
+        <li><strong>T5 shoulders</strong> (Void Reaver) → DPS first</li>
+        <li><strong>T5 legs</strong> (Kael/Vashj) → caster DPS</li>
+        <li><strong>T5 gloves</strong> (Karathress) → melee/healers</li>
+        <li><strong>T5 wrists</strong> (Morogrim) → spread evenly</li>
+      </ul>
+    </div>
+
+    <div class="tips-card">
+      <h4>Lykil Cooldowns</h4>
+      <ul>
+        <li><strong>Bloodlust/Heroism:</strong> Save fyrir burn fasa (Solarian P3, Kael P5, Vashj P3, Karathress P4, Morogrim 25%)</li>
+        <li><strong>Innervate:</strong> Á healers fyrir Phase 4-5 á Kael</li>
+        <li><strong>Mana Tide Totem:</strong> Reglulega fyrir healers</li>
+        <li><strong>Soulstone:</strong> Á main healer fyrir wipe protection</li>
+      </ul>
+    </div>
+
+    <div class="tips-card">
+      <h4>Addons sem mæla með</h4>
+      <ul>
+        <li><strong>Deadly Boss Mods (DBM)</strong> — timer fyrir alla mechanics</li>
+        <li><strong>Decursive</strong> — quick dispel/cleanse</li>
+        <li><strong>Omen</strong> — threat tracking</li>
+        <li><strong>Grid eða Healbot</strong> — healer UI</li>
+        <li><strong>WeakAuras</strong> — custom alerts (Wrath, MC, Shock Blast)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  <div class="closing">"Megi Sólarprinsinn falla og Sjávarnornin sökkva."</div>
+  <div>Raid Leiðbeiningar · TBC Anniversary Phase 2 · Overlords of Outland</div>
+</footer>
+
+<script>
+  // Reading progress bar
+  const progress = document.getElementById('progress');
+  function updateProgress() {
+    const scrolled = window.scrollY;
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = (scrolled / total) * 100;
+    progress.style.width = pct + '%';
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+
+</body>
+</html>
