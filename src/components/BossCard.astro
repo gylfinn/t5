@@ -1,0 +1,102 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { render } from 'astro:content';
+import DifficultySkulls from './DifficultySkulls.astro';
+import Mech from './Mech.astro';
+import BossFigure from './BossFigure.astro';
+
+interface Props {
+  boss: CollectionEntry<'bosses'>;
+}
+
+const { boss } = Astro.props;
+const { Content } = await render(boss);
+const num = String(boss.data.order).padStart(2, '0');
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const portraitUrl = boss.data.portrait
+  ? (boss.data.portrait.startsWith('/') ? base + boss.data.portrait : boss.data.portrait)
+  : null;
+---
+<article id={boss.data.slug} class:list={['boss', portraitUrl && 'has-portrait']}>
+  <div class="boss-head">
+    {portraitUrl && (
+      <div class="boss-portrait">
+        <img src={portraitUrl} alt={`${boss.data.name} portrait`} loading="lazy" decoding="async" />
+      </div>
+    )}
+    <div class="boss-num">{num}</div>
+    <div class="boss-titles">
+      <h3>{boss.data.name}</h3>
+      <div class="tagline">{boss.data.tagline}</div>
+    </div>
+    <DifficultySkulls level={boss.data.difficulty} />
+  </div>
+
+  <div class="boss-body">
+    <aside class="stats">
+      <div class="stats-title">Quick Facts</div>
+      {boss.data.stats.map(row => (
+        <div class="stat-row">
+          <span class="k">{row.k}</span>
+          <span class="v">{row.v}</span>
+        </div>
+      ))}
+    </aside>
+
+    <div class="content">
+      <Content />
+
+      {boss.data.images?.map(img => (
+        <BossFigure src={img.src} alt={img.alt} caption={img.caption} />
+      ))}
+
+      <h4>{boss.data.mechanicsHeading ?? 'Mechanics'}</h4>
+      <div class="mech-list">
+        {boss.data.mechanics.map(m => (
+          <Mech role={m.role} label={m.label} name={m.name} text={m.text} />
+        ))}
+      </div>
+
+      {(boss.data.phases?.length || boss.data.strategy) && <h4>Strategía</h4>}
+      {boss.data.strategy && <p set:html={boss.data.strategy} />}
+      {boss.data.phases && boss.data.phases.length > 0 && (
+        <div class="phases">
+          {boss.data.phases.map(p => (
+            <div class="phase-block">
+              <div class="ph-head">
+                <span class="phase-num">{p.num}</span>
+                <span class="phase-name">{p.name}</span>
+              </div>
+              {p.text.split(/\n\n+/).map(para => <p set:html={para.trim()} />)}
+              {p.image && (
+                <BossFigure src={p.image.src} alt={p.image.alt} caption={p.image.caption} />
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {boss.data.tactics && boss.data.tactics.length > 0 && (
+        <div class="tactics">
+          <div class="head">★ Tactics okkar</div>
+          <ul>
+            {boss.data.tactics.map(t => <li set:html={t} />)}
+          </ul>
+        </div>
+      )}
+
+      <div class="callout">
+        <div class="head">⚡ Lykilatriði</div>
+        <ul>
+          {boss.data.keyPoints.map(point => <li set:html={point} />)}
+        </ul>
+      </div>
+
+      {boss.data.loot && (
+        <div class="loot">
+          <div><strong>Loot:</strong> <Fragment set:html={boss.data.loot} /></div>
+        </div>
+      )}
+    </div>
+  </div>
+</article>

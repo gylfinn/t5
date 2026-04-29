@@ -1,0 +1,45 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  caption?: string;
+}
+
+const { src, alt, caption } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const url = src.startsWith('/') ? `${base.replace(/\/$/, '')}${src}` : src;
+---
+<figure class="boss-figure">
+  <img src={url} alt={alt} loading="lazy" decoding="async" />
+  {caption && <figcaption set:html={caption} />}
+</figure>
+
+<style is:global>
+  .boss-figure {
+    margin: 18px 0 22px;
+    border: 1px solid var(--border-strong);
+    border-radius: 10px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.25);
+    transition: border-color 0.25s, box-shadow 0.25s;
+  }
+  .boss-figure:hover {
+    border-color: var(--gold);
+    box-shadow: 0 8px 24px -12px rgba(244, 184, 41, 0.35);
+  }
+  .boss-figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .boss-figure figcaption {
+    padding: 10px 14px;
+    font-size: 13px;
+    color: var(--text-dim);
+    border-top: 1px solid var(--border);
+    background: rgba(244, 184, 41, 0.04);
+    font-style: italic;
+  }
+  .boss-figure figcaption b,
+  .boss-figure figcaption strong { color: var(--gold); font-weight: 600; font-style: normal; }
+</style>

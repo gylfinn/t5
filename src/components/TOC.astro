@@ -1,0 +1,44 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import TocDropdown from './TocDropdown.astro';
+
+interface Props {
+  bosses: CollectionEntry<'bosses'>[];
+}
+
+const { bosses } = Astro.props;
+const tk = bosses.filter(b => b.data.raid === 'tk').sort((a, b) => a.data.order - b.data.order);
+const ssc = bosses.filter(b => b.data.raid === 'ssc').sort((a, b) => a.data.order - b.data.order);
+
+const tkItems = [
+  { href: '#tk', label: 'Yfirlit', kind: 'overview' as const },
+  ...tk.map(b => ({
+    href: `#${b.data.slug}`,
+    label: b.data.tocLabel ?? b.data.name,
+    num: String(b.data.order).padStart(2, '0'),
+    kind: 'boss' as const,
+  })),
+  { href: '#tk-trash', label: 'Trash', kind: 'trash' as const },
+];
+
+const sscItems = [
+  { href: '#ssc', label: 'Yfirlit', kind: 'overview' as const },
+  ...ssc.map(b => ({
+    href: `#${b.data.slug}`,
+    label: b.data.tocLabel ?? b.data.name,
+    num: String(b.data.order).padStart(2, '0'),
+    kind: 'boss' as const,
+  })),
+  { href: '#ssc-trash', label: 'Trash', kind: 'trash' as const },
+];
+---
+<nav class="toc">
+  <div class="toc-inner">
+    <a href="#top" class="toc-brand">⚔ TBC Anniversary · Phase 2</a>
+    <div class="toc-links">
+      <TocDropdown trigger="The Eye" panelId="toc-panel-tk" items={tkItems} />
+      <TocDropdown trigger="SSC" panelId="toc-panel-ssc" items={sscItems} />
+      <a href="#tips" class="toc-link">Ráðleggingar</a>
+    </div>
+  </div>
+</nav>

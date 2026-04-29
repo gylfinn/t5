@@ -1,0 +1,41 @@
+---
+interface Item {
+  href: string;
+  label: string;
+  num?: string;
+  kind?: 'overview' | 'boss' | 'trash';
+}
+
+interface Props {
+  trigger: string;
+  panelId: string;
+  items: Item[];
+}
+
+const { trigger, panelId, items } = Astro.props;
+---
+<div class="toc-dropdown" data-open="false" data-active="false">
+  <button
+    type="button"
+    class="toc-trigger"
+    aria-expanded="false"
+    aria-controls={panelId}
+  >
+    <span>{trigger}</span>
+    <svg class="caret" viewBox="0 0 12 8" width="10" height="8" aria-hidden="true">
+      <path d="M1 1l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  </button>
+  <div id={panelId} class="toc-panel" role="menu" aria-label={trigger}>
+    {items.map(item => (
+      <a
+        href={item.href}
+        role="menuitem"
+        class:list={['toc-panel-item', item.kind && `toc-panel-${item.kind}`]}
+      >
+        {item.num && <span class="num">{item.num}</span>}
+        <span class="label">{item.label}</span>
+      </a>
+    ))}
+  </div>
+</div>

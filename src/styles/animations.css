@@ -1,0 +1,77 @@
+/* Tier 1 animations — scroll-triggered reveals + ambience.
+   Pure CSS via animation-timeline: view() in Chromium;
+   IntersectionObserver fallback adds .in-view in browsers
+   that don't support scroll-driven animations. */
+
+@keyframes reveal-up {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes skull-pulse {
+  0%, 100% { filter: drop-shadow(0 0 0 transparent); transform: scale(1); }
+  50%      { filter: drop-shadow(0 0 6px rgba(255, 123, 48, 0.6)); transform: scale(1.08); }
+}
+
+@keyframes hero-ember {
+  0%   { opacity: 0.35; transform: translate3d(0, 0, 0) scale(1); }
+  50%  { opacity: 0.55; transform: translate3d(0, -10px, 0) scale(1.02); }
+  100% { opacity: 0.35; transform: translate3d(0, 0, 0) scale(1); }
+}
+
+/* --- Scroll-driven reveals (modern Chromium) --- */
+@supports (animation-timeline: view()) {
+  .boss,
+  .raid-intro,
+  .tips-card,
+  .trash-group,
+  .boss-figure {
+    animation: reveal-up linear both;
+    animation-timeline: view();
+    animation-range: entry 5% cover 25%;
+  }
+}
+
+/* --- IntersectionObserver fallback (Firefox/Safari) --- */
+@supports not (animation-timeline: view()) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- Difficulty skull pulse on the live skulls --- */
+.skull.on {
+  animation: skull-pulse 2.4s ease-in-out infinite;
+}
+.skull.on:nth-child(2) { animation-delay: 0.15s; }
+.skull.on:nth-child(3) { animation-delay: 0.30s; }
+.skull.on:nth-child(4) { animation-delay: 0.45s; }
+.skull.on:nth-child(5) { animation-delay: 0.60s; }
+
+/* --- Hero ambience --- */
+.hero::before {
+  animation: hero-ember 9s ease-in-out infinite;
+}
+
+/* --- Reduced motion: kill everything moving --- */
+@media (prefers-reduced-motion: reduce) {
+  .boss,
+  .raid-intro,
+  .tips-card,
+  .trash-group,
+  .boss-figure,
+  .reveal,
+  .skull.on,
+  .hero::before {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

@@ -1,0 +1,31 @@
+---
+import type { CollectionEntry } from 'astro:content';
+interface Props {
+  group: CollectionEntry<'trashGroups'>;
+}
+const { group } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<article class="trash-group">
+  <header class="trash-group-head">
+    <h3>{group.data.title}</h3>
+    {group.data.forBoss && <span class="for-boss">→ {group.data.forBoss}</span>}
+  </header>
+
+  {group.data.notes.length > 0 && (
+    <ul class="trash-notes">
+      {group.data.notes.map(n => <li set:html={n} />)}
+    </ul>
+  )}
+
+  {group.data.images && group.data.images.length > 0 && (
+    <div class="trash-figures">
+      {group.data.images.map(img => (
+        <figure class="trash-figure">
+          <img src={img.src.startsWith('/') ? base + img.src : img.src} alt={img.alt} loading="lazy" decoding="async" />
+          {img.caption && <figcaption set:html={img.caption} />}
+        </figure>
+      ))}
+    </div>
+  )}
+</article>

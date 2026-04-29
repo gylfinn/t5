@@ -1,0 +1,27 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import TrashGroup from './TrashGroup.astro';
+
+interface Props {
+  raid: 'tk' | 'ssc';
+  groups: CollectionEntry<'trashGroups'>[];
+}
+
+const { raid, groups } = Astro.props;
+const sorted = [...groups].sort((a, b) => a.data.order - b.data.order);
+const id = `${raid}-trash`;
+const title = raid === 'tk' ? 'Tempest Keep — Trash' : 'Serpentshrine Cavern — Trash';
+const label = raid === 'tk' ? 'Trash · Hluti I.5' : 'Trash · Hluti II.5';
+const meta = 'Trash mob ráðgjöf — pull strats og kill order';
+---
+<section id={id} class="raid-section trash-section-block">
+  <div class="raid-header">
+    <div class="label">{label}</div>
+    <h2>{title}</h2>
+    <div class="raid-meta">{meta}</div>
+  </div>
+
+  <div class="trash-groups">
+    {sorted.map(group => <TrashGroup group={group} />)}
+  </div>
+</section>

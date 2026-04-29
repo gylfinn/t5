@@ -1,0 +1,26 @@
+---
+type Role = 'tank' | 'raid' | 'adds' | 'move' | 'heal' | 'dispel' | 'interrupt';
+
+interface Props {
+  role: Role;
+  label?: string;
+  name: string;
+  text: string;
+}
+
+const { role, label, name, text } = Astro.props;
+
+const labels: Record<Role, string> = {
+  tank: 'Tank',
+  raid: 'Raid',
+  adds: 'Adds',
+  move: 'Færsla',
+  heal: 'Heal',
+  dispel: 'Dispel',
+  interrupt: 'Interrupt',
+};
+---
+<div class={`mech ${role}-m`}>
+  <span class={`chip ${role}`}>{label ?? labels[role]}</span>
+  <div class="body-text"><b>{name}</b> — <Fragment set:html={text} /></div>
+</div>

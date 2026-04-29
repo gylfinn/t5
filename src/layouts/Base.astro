@@ -1,0 +1,140 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import '../styles/tokens.css';
+import '../styles/global.css';
+import '../styles/animations.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'Ítarlegur leiðarvísir fyrir Tempest Keep og Serpentshrine Cavern á TBC Anniversary serverunum.' } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="is">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <ClientRouter />
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+  <slot />
+
+  <script>
+    // Reading progress bar
+    const init = () => {
+      const progress = document.getElementById('progress');
+      if (!progress) return;
+      const update = () => {
+        const scrolled = window.scrollY;
+        const total = document.documentElement.scrollHeight - window.innerHeight;
+        const pct = total > 0 ? (scrolled / total) * 100 : 0;
+        progress.style.width = pct + '%';
+      };
+      window.addEventListener('scroll', update, { passive: true });
+      update();
+    };
+
+    // IntersectionObserver fallback for browsers without animation-timeline: view()
+    const setupReveals = () => {
+      const supportsScrollTimeline = CSS.supports('animation-timeline: view()');
+      if (supportsScrollTimeline) return;
+      const targets = document.querySelectorAll('.boss, .raid-intro, .tips-card, .trash-group, .boss-figure');
+      targets.forEach(el => el.classList.add('reveal'));
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+      targets.forEach(el => io.observe(el));
+    };
+
+    // TOC scrollspy: highlight the current section + bubble up to parent dropdown
+    const setupScrollspy = () => {
+      const links = document.querySelectorAll<HTMLAnchorElement>('.toc-links a');
+      if (!links.length) return;
+      const linkByHash = new Map<string, HTMLAnchorElement>();
+      links.forEach(a => {
+        const hash = a.getAttribute('href');
+        if (hash?.startsWith('#')) linkByHash.set(hash.slice(1), a);
+      });
+      const dropdowns = document.querySelectorAll<HTMLElement>('.toc-dropdown');
+      const targets = Array.from(document.querySelectorAll<HTMLElement>('section[id], article[id]'));
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            links.forEach(a => a.classList.remove('active'));
+            dropdowns.forEach(d => d.setAttribute('data-active', 'false'));
+            const link = linkByHash.get(id);
+            if (link) {
+              link.classList.add('active');
+              const parent = link.closest<HTMLElement>('.toc-dropdown');
+              if (parent) parent.setAttribute('data-active', 'true');
+            }
+          }
+        });
+      }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+      targets.forEach(t => io.observe(t));
+    };
+
+    // Dropdown tap-toggle (mobile/touch); desktop uses CSS :hover/:focus-within
+    const setupDropdowns = () => {
+      const dropdowns = Array.from(document.querySelectorAll<HTMLElement>('.toc-dropdown'));
+      if (!dropdowns.length) return;
+
+      const closeAll = () => dropdowns.forEach(d => {
+        d.setAttribute('data-open', 'false');
+        d.querySelector('.toc-trigger')?.setAttribute('aria-expanded', 'false');
+      });
+
+      dropdowns.forEach(dd => {
+        const trigger = dd.querySelector<HTMLButtonElement>('.toc-trigger');
+        if (!trigger) return;
+        trigger.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const open = dd.getAttribute('data-open') === 'true';
+          closeAll();
+          if (!open) {
+            dd.setAttribute('data-open', 'true');
+            trigger.setAttribute('aria-expanded', 'true');
+          }
+        });
+        dd.querySelectorAll<HTMLAnchorElement>('a').forEach(a => {
+          a.addEventListener('click', () => {
+            dd.setAttribute('data-open', 'false');
+            trigger.setAttribute('aria-expanded', 'false');
+            // Blur so :focus-within releases on touch devices
+            (document.activeElement as HTMLElement | null)?.blur?.();
+          });
+        });
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!(e.target as Element).closest('.toc-dropdown')) closeAll();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeAll();
+      });
+    };
+
+    const boot = () => { init(); setupReveals(); setupScrollspy(); setupDropdowns(); };
+    document.addEventListener('astro:page-load', boot);
+    if (document.readyState !== 'loading') boot();
+    else document.addEventListener('DOMContentLoaded', boot);
+  </script>
+</body>
+</html>

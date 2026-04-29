@@ -1,0 +1,22 @@
+:root {
+  --bg: #0a0e15;
+  --bg-elev: #11151c;
+  --card: #161b22;
+  --card-hover: #1c2128;
+  --border: rgba(212, 160, 23, 0.12);
+  --border-strong: rgba(212, 160, 23, 0.35);
+  --text: #e6e6e6;
+  --text-dim: #9ca3af;
+  --text-muted: #6b7280;
+  --gold: #f4b829;
+  --gold-dim: #d4a017;
+  --gold-deep: #8a6b0d;
+  --fire: #ff7b30;
+  --tank: #3b82c4;
+  --healer: #4cb050;
+  --dps: #c44141;
+  --phase: #a78bfa;
+  --warn: #f59e0b;
+  --info: #60a5fa;
+  --tip: #34d399;
+}

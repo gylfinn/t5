@@ -1,0 +1,73 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import TOC from '../components/TOC.astro';
+import Hero from '../components/Hero.astro';
+import RaidIntro from '../components/RaidIntro.astro';
+import BossCard from '../components/BossCard.astro';
+import TrashSection from '../components/TrashSection.astro';
+import Tips from '../components/Tips.astro';
+
+const all = (await getCollection('bosses')).sort((a, b) => a.data.order - b.data.order);
+const tk = all.filter(b => b.data.raid === 'tk');
+const ssc = all.filter(b => b.data.raid === 'ssc');
+
+const trash = await getCollection('trashGroups');
+const tkTrash = trash.filter(t => t.data.raid === 'tk');
+const sscTrash = trash.filter(t => t.data.raid === 'ssc');
+
+const tkIntro = `The Eye er kristallinn virki <strong>Kael'thas Sunstrider</strong> sem svífur yfir Netherstorm. Þú flýgur upp á virkið og berst í gegnum fjórar atrennur þangað til þú stendur augliti til auglitis við Sólarprinsinn sjálfan. Fyrir guildi sem eru ný í T5 er mælt með að byrja á Void Reaver til að venjast trash og umhverfi.`;
+
+const sscIntro = `SSC er undir-vatns hellir þar sem <strong>Lady Vashj</strong> hefur byggt sér virki. Sex bossar á leiðinni að henni og hver og einn er mismunandi tegund af áskorun — frá resistance-dansi á Hydross til hreins chaos á Vashj. Vashj er gatekeeper boss með Kael'thas — báðir verða að deyja til að opna Hyjal og Black Temple.`;
+---
+<Base title="Raid Leiðbeiningar — Tempest Keep & Serpentshrine Cavern | TBC Anniversary">
+  <TOC bosses={all} />
+  <Hero />
+
+  <div class="container">
+    <section id="tk" class="raid-section">
+      <RaidIntro
+        label="Raid · Hluti I"
+        title="Tempest Keep: The Eye"
+        meta="Netherstorm · 4 bossar · Attunement: The Eye Attunement"
+        blurbHtml={tkIntro}
+        info={[
+          { k: 'Staðsetning', v: 'Netherstorm' },
+          { k: 'Bossar', v: '4' },
+          { k: 'Tier loot', v: 'T5 (Verdant Sphere)' },
+          { k: 'Mælt kill order', v: 'VR → Solarian → Al\'ar → Kael' },
+        ]}
+      />
+      {tk.map(boss => <BossCard boss={boss} />)}
+    </section>
+
+    {tkTrash.length > 0 && <TrashSection raid="tk" groups={tkTrash} />}
+
+    {ssc.length > 0 && (
+      <section id="ssc" class="raid-section">
+        <RaidIntro
+          label="Raid · Hluti II"
+          title="Serpentshrine Cavern"
+          meta="Coilfang Reservoir, Zangarmarsh · 6 bossar · Attunement: The Mark of Vashj"
+          blurbHtml={sscIntro}
+          info={[
+            { k: 'Staðsetning', v: 'Zangarmarsh' },
+            { k: 'Bossar', v: '6' },
+            { k: 'Tier loot', v: 'T5 (Vashj\'s Vial)' },
+            { k: 'Mælt kill order', v: 'Hydross → Lurker → Tidewalker → Karathress → Leotheras → Vashj' },
+          ]}
+        />
+        {ssc.map(boss => <BossCard boss={boss} />)}
+      </section>
+    )}
+
+    {sscTrash.length > 0 && <TrashSection raid="ssc" groups={sscTrash} />}
+
+    <Tips />
+  </div>
+
+  <footer>
+    <div class="closing">"Megi Sólarprinsinn falla og Sjávarnornin sökkva."</div>
+    <div>Raid Leiðbeiningar · TBC Anniversary Phase 2 · Overlords of Outland</div>
+  </footer>
+</Base>

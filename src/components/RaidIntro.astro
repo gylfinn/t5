@@ -1,0 +1,28 @@
+---
+interface InfoCell { k: string; v: string; }
+interface Props {
+  label: string;
+  title: string;
+  meta: string;
+  blurbHtml: string;
+  info: InfoCell[];
+}
+const { label, title, meta, blurbHtml, info } = Astro.props;
+---
+<div class="raid-header">
+  <div class="label">{label}</div>
+  <h2>{title}</h2>
+  <div class="raid-meta">{meta}</div>
+</div>
+
+<div class="raid-intro">
+  <Fragment set:html={blurbHtml} />
+  <div class="info-grid">
+    {info.map(cell => (
+      <div>
+        <div class="k">{cell.k}</div>
+        <div class="v">{cell.v}</div>
+      </div>
+    ))}
+  </div>
+</div>
