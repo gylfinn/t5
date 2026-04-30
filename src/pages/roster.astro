@@ -1,0 +1,311 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import TOC from '../components/TOC.astro';
+
+const bosses = (await getCollection('bosses')).sort((a, b) => a.data.order - b.data.order);
+const raiders = await getCollection('raiders');
+
+type Role = 'tank' | 'heal' | 'melee' | 'ranged';
+const roleOrder: Role[] = ['tank', 'heal', 'melee', 'ranged'];
+const roleLabels: Record<Role, string> = {
+  tank: 'Tankar',
+  heal: 'Healers',
+  melee: 'Melee DPS',
+  ranged: 'Ranged DPS',
+};
+const roleIcons: Record<Role, string> = {
+  tank: '🛡',
+  heal: '✚',
+  melee: '⚔',
+  ranged: '🏹',
+};
+
+const byRole: Record<Role, typeof raiders> = {
+  tank: [], heal: [], melee: [], ranged: [],
+};
+for (const r of raiders) {
+  byRole[r.data.role as Role].push(r);
+}
+// Stable sort by character name within each role
+for (const role of roleOrder) {
+  byRole[role].sort((a, b) => a.data.character.localeCompare(b.data.character));
+}
+
+const total = raiders.length;
+---
+<Base title="Roster — Hitaveitan T5 | TBC Anniversary">
+  <TOC bosses={bosses} variant="roster" />
+
+  <header class="roster-hero">
+    <div class="roster-hero-eyebrow">Áhöfnin</div>
+    <h1>Roster</h1>
+    <p class="roster-sub">{total} raiderar · 25-manna lið Hitaveitunnar</p>
+  </header>
+
+  <main class="roster-container">
+    {roleOrder.map(role => byRole[role].length > 0 && (
+      <section class="roster-section" data-role={role}>
+        <header class="roster-section-head">
+          <span class="roster-section-icon" aria-hidden="true">{roleIcons[role]}</span>
+          <h2>{roleLabels[role]}</h2>
+          <span class="roster-section-count">{byRole[role].length}</span>
+        </header>
+        <div class="roster-grid">
+          {byRole[role].map(r => (
+            <article class="raider-card" data-class={r.data.class.toLowerCase()}>
+              <div class="raider-icon" aria-hidden="true">{r.data.class.charAt(0)}</div>
+              <div class="raider-titles">
+                <h3 class="raider-character">{r.data.character}</h3>
+                <div class="raider-player">{r.data.player}</div>
+              </div>
+              <div class="raider-meta">
+                <span class="raider-class">{r.data.class}</span>
+                {r.data.spec && <span class="raider-dot" aria-hidden="true">·</span>}
+                {r.data.spec && <span class="raider-spec">{r.data.spec}</span>}
+                {r.data.race && <span class="raider-dot" aria-hidden="true">·</span>}
+                {r.data.race && <span class="raider-race">{r.data.race}</span>}
+              </div>
+              {r.data.notes && <p class="raider-notes">{r.data.notes}</p>}
+            </article>
+          ))}
+        </div>
+      </section>
+    ))}
+
+    {total === 0 && (
+      <div class="roster-empty">
+        <p>Engir raiderar í roster ennþá. Bæta við í <code>src/data/roster.json</code>.</p>
+      </div>
+    )}
+  </main>
+
+  <footer class="roster-footer">
+    <div>Hitaveitan · TBC Anniversary Phase 2</div>
+  </footer>
+</Base>
+
+<style>
+  .roster-hero {
+    padding: 56px 32px 28px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+  }
+  .roster-hero-eyebrow {
+    color: var(--gold);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .roster-hero h1 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(34px, 5vw, 52px);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.1;
+    margin-bottom: 12px;
+    background: linear-gradient(180deg, #fff 0%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .roster-sub {
+    color: var(--text-dim);
+    font-size: 15px;
+    max-width: 620px;
+    margin: 0 auto;
+  }
+
+  .roster-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px;
+  }
+
+  .roster-section { margin-bottom: 56px; }
+  .roster-section-head {
+    display: flex; align-items: baseline; gap: 14px;
+    margin-bottom: 20px;
+    padding-bottom: 14px;
+    border-bottom: 2px solid var(--border-strong);
+  }
+  .roster-section-icon {
+    font-size: 22px;
+    line-height: 1;
+    filter: drop-shadow(0 0 10px rgba(244, 184, 41, 0.25));
+  }
+  .roster-section-head h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 26px;
+    color: #fff;
+    letter-spacing: 0.5px;
+  }
+  .roster-section-count {
+    color: var(--text-muted);
+    font-size: 14px;
+    margin-left: auto;
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+  .roster-section[data-role="tank"]   .roster-section-head h2 { color: var(--tank); }
+  .roster-section[data-role="heal"]   .roster-section-head h2 { color: var(--healer); }
+  .roster-section[data-role="melee"]  .roster-section-head h2 { color: var(--dps); }
+  .roster-section[data-role="ranged"] .roster-section-head h2 { color: var(--info); }
+
+  .roster-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 14px;
+  }
+
+  .raider-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--gold-dim);
+    border-radius: 10px;
+    padding: 14px 16px;
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    grid-template-areas:
+      "icon titles"
+      "icon meta"
+      "notes notes";
+    gap: 4px 12px;
+    align-items: center;
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  }
+  .raider-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 26px -16px rgba(0, 0, 0, 0.5);
+  }
+  .raider-icon {
+    grid-area: icon;
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cinzel', serif;
+    font-size: 22px;
+    font-weight: 700;
+    background: rgba(0, 0, 0, 0.4);
+    border: 2px solid var(--border-strong);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    align-self: start;
+    grid-row: span 2;
+  }
+  .raider-titles { grid-area: titles; min-width: 0; }
+  .raider-character {
+    font-family: 'Cinzel', serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    line-height: 1.15;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .raider-player {
+    color: var(--text-muted);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    font-weight: 600;
+    margin-top: 2px;
+  }
+  .raider-meta {
+    grid-area: meta;
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px;
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-top: 2px;
+  }
+  .raider-class { font-weight: 600; }
+  .raider-dot { color: var(--text-muted); }
+  .raider-notes {
+    grid-area: notes;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--border);
+    font-size: 12px;
+    line-height: 1.45;
+    color: var(--text-dim);
+    font-style: italic;
+  }
+
+  /* Class-color treatment per card */
+  .raider-card[data-class="warrior"] { border-left-color: var(--class-warrior); }
+  .raider-card[data-class="warrior"] .raider-icon { color: var(--class-warrior); border-color: var(--class-warrior); }
+  .raider-card[data-class="warrior"]:hover { box-shadow: 0 12px 26px -16px var(--class-warrior); }
+  .raider-card[data-class="warrior"] .raider-class { color: var(--class-warrior); }
+
+  .raider-card[data-class="paladin"] { border-left-color: var(--class-paladin); }
+  .raider-card[data-class="paladin"] .raider-icon { color: var(--class-paladin); border-color: var(--class-paladin); }
+  .raider-card[data-class="paladin"]:hover { box-shadow: 0 12px 26px -16px var(--class-paladin); }
+  .raider-card[data-class="paladin"] .raider-class { color: var(--class-paladin); }
+
+  .raider-card[data-class="hunter"] { border-left-color: var(--class-hunter); }
+  .raider-card[data-class="hunter"] .raider-icon { color: var(--class-hunter); border-color: var(--class-hunter); }
+  .raider-card[data-class="hunter"]:hover { box-shadow: 0 12px 26px -16px var(--class-hunter); }
+  .raider-card[data-class="hunter"] .raider-class { color: var(--class-hunter); }
+
+  .raider-card[data-class="priest"] { border-left-color: var(--class-priest); }
+  .raider-card[data-class="priest"] .raider-icon { color: var(--class-priest); border-color: var(--class-priest); }
+  .raider-card[data-class="priest"]:hover { box-shadow: 0 12px 26px -16px rgba(255, 255, 255, 0.4); }
+  .raider-card[data-class="priest"] .raider-class { color: var(--class-priest); }
+
+  .raider-card[data-class="rogue"] { border-left-color: var(--class-rogue); }
+  .raider-card[data-class="rogue"] .raider-icon { color: var(--class-rogue); border-color: var(--class-rogue); }
+  .raider-card[data-class="rogue"]:hover { box-shadow: 0 12px 26px -16px var(--class-rogue); }
+  .raider-card[data-class="rogue"] .raider-class { color: var(--class-rogue); }
+
+  .raider-card[data-class="shaman"] { border-left-color: var(--class-shaman); }
+  .raider-card[data-class="shaman"] .raider-icon { color: var(--class-shaman); border-color: var(--class-shaman); }
+  .raider-card[data-class="shaman"]:hover { box-shadow: 0 12px 26px -16px var(--class-shaman); }
+  .raider-card[data-class="shaman"] .raider-class { color: var(--class-shaman); }
+
+  .raider-card[data-class="mage"] { border-left-color: var(--class-mage); }
+  .raider-card[data-class="mage"] .raider-icon { color: var(--class-mage); border-color: var(--class-mage); }
+  .raider-card[data-class="mage"]:hover { box-shadow: 0 12px 26px -16px var(--class-mage); }
+  .raider-card[data-class="mage"] .raider-class { color: var(--class-mage); }
+
+  .raider-card[data-class="warlock"] { border-left-color: var(--class-warlock); }
+  .raider-card[data-class="warlock"] .raider-icon { color: var(--class-warlock); border-color: var(--class-warlock); }
+  .raider-card[data-class="warlock"]:hover { box-shadow: 0 12px 26px -16px var(--class-warlock); }
+  .raider-card[data-class="warlock"] .raider-class { color: var(--class-warlock); }
+
+  .raider-card[data-class="druid"] { border-left-color: var(--class-druid); }
+  .raider-card[data-class="druid"] .raider-icon { color: var(--class-druid); border-color: var(--class-druid); }
+  .raider-card[data-class="druid"]:hover { box-shadow: 0 12px 26px -16px var(--class-druid); }
+  .raider-card[data-class="druid"] .raider-class { color: var(--class-druid); }
+
+  .roster-empty {
+    text-align: center;
+    padding: 80px 24px;
+    color: var(--text-dim);
+  }
+  .roster-empty code {
+    font-family: 'Consolas', 'Menlo', monospace;
+    background: rgba(255, 255, 255, 0.06);
+    padding: 2px 8px;
+    border-radius: 4px;
+    color: var(--gold);
+  }
+
+  .roster-footer {
+    text-align: center;
+    padding: 32px 32px 60px;
+    border-top: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 13px;
+    font-family: 'Cinzel', serif;
+    font-style: italic;
+  }
+
+  @media (max-width: 540px) {
+    .roster-container { padding: 20px 16px; }
+    .roster-grid { grid-template-columns: 1fr; }
+    .roster-section-head h2 { font-size: 22px; }
+  }
+</style>

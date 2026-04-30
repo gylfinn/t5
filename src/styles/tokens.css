@@ -19,4 +19,15 @@
   --warn: #f59e0b;
   --info: #60a5fa;
   --tip: #34d399;
+
+  /* WoW class colors (TBC era) */
+  --class-warrior: #c79c6e;
+  --class-paladin: #f58cba;
+  --class-hunter:  #abd473;
+  --class-priest:  #ffffff;
+  --class-rogue:   #fff569;
+  --class-shaman:  #2d8cff;
+  --class-mage:    #69ccf0;
+  --class-warlock: #9482c9;
+  --class-druid:   #ff7d0a;
 }

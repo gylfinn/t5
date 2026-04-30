@@ -4,13 +4,17 @@ import BossesMegaMenu from './BossesMegaMenu.astro';
 
 interface Props {
   bosses: CollectionEntry<'bosses'>[];
-  variant?: 'full' | 'cheatsheet';
+  variant?: 'full' | 'cheatsheet' | 'roster';
 }
 
 const { bosses, variant = 'full' } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const homeHref = variant === 'cheatsheet' ? `${base}/` : '#top';
-const linkPrefix = variant === 'cheatsheet' ? `${base}/` : '';
+const isCheatsheet = variant === 'cheatsheet';
+const isRoster = variant === 'roster';
+const offIndex = isCheatsheet || isRoster;
+const homeHref = offIndex ? `${base}/` : '#top';
+const linkPrefix = offIndex ? `${base}/` : '';
+const tipsHref = offIndex ? `${base}/#tips` : '#tips';
 ---
 <nav class="topnav">
   <div class="topnav-inner">
@@ -23,18 +27,23 @@ const linkPrefix = variant === 'cheatsheet' ? `${base}/` : '';
     </a>
     <div class="topnav-links">
       <BossesMegaMenu bosses={bosses} linkPrefix={linkPrefix} />
-      {variant === 'full' && (
-        <>
-          <a href="#tips" class="topnav-link" aria-label="Tips">
-            <span class="topnav-link-label">Tips</span>
-          </a>
-          <a href={`${base}/cheatsheet`} class="topnav-link topnav-link-cheat" aria-label="Cheat Sheet">
-            <span aria-hidden="true">⚡</span>
-            <span class="topnav-link-label">Cheat Sheet</span>
-          </a>
-        </>
+      {!isCheatsheet && (
+        <a href={tipsHref} class="topnav-link" aria-label="Tips">
+          <span class="topnav-link-label">Tips</span>
+        </a>
       )}
-      {variant === 'cheatsheet' && (
+      {!isRoster && (
+        <a href={`${base}/roster`} class="topnav-link" aria-label="Roster">
+          <span class="topnav-link-label">Roster</span>
+        </a>
+      )}
+      {!isCheatsheet && (
+        <a href={`${base}/cheatsheet`} class="topnav-link topnav-link-cheat" aria-label="Cheat Sheet">
+          <span aria-hidden="true">⚡</span>
+          <span class="topnav-link-label">Cheat Sheet</span>
+        </a>
+      )}
+      {isCheatsheet && (
         <>
           <a href={`${base}/`} class="topnav-link" aria-label="Til baka í aðalleiðarvísi">
             <span aria-hidden="true">←</span>

@@ -1,0 +1,79 @@
+[
+  {
+    "id": "example-tank",
+    "player": "Player",
+    "character": "CharacterName",
+    "class": "Warrior",
+    "role": "tank",
+    "spec": "Protection",
+    "race": "Human",
+    "notes": "Main tank"
+  },
+  {
+    "id": "example-paladin-tank",
+    "player": "Player",
+    "character": "CharacterName",
+    "class": "Paladin",
+    "role": "tank",
+    "spec": "Protection",
+    "race": "Dwarf",
+    "notes": "Adds tank · Holy Light spammer"
+  },
+  {
+    "id": "example-druid-heal",
+    "player": "Player",
+    "character": "CharacterName",
+    "class": "Druid",
+    "role": "heal",
+    "spec": "Restoration",
+    "race": "Night Elf"
+  },
+  {
+    "id": "example-priest-heal",
+    "player": "Player",
+    "character": "CharacterName",
+    "class": "Priest",
+    "role": "heal",
+    "spec": "Holy",
+    "race": "Draenei"
+  },
+  {
+    "id": "example-rogue",
+    "player": "Player",
+    "character": "CharacterName",
+    "class": "Rogue",
+    "role": "melee",
+    "spec": "Combat",
+    "race": "Human",
+    "notes": "Kick rotation"
+  },
+  {
+    "id": "example-warlock",
+    "player": "Player",
+    "character": "CharacterName",
+    "class": "Warlock",
+    "role": "ranged",
+    "spec": "Affliction",
+    "race": "Gnome",
+    "notes": "Caribdis tank-team"
+  },
+  {
+    "id": "example-mage",
+    "player": "Player",
+    "character": "CharacterName",
+    "class": "Mage",
+    "role": "ranged",
+    "spec": "Frost",
+    "race": "Gnome"
+  },
+  {
+    "id": "example-hunter",
+    "player": "Player",
+    "character": "CharacterName",
+    "class": "Hunter",
+    "role": "ranged",
+    "spec": "Beast Mastery",
+    "race": "Night Elf",
+    "notes": "Strider kiter"
+  }
+]

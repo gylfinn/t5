@@ -1,5 +1,5 @@
 import { defineCollection, z } from 'astro:content';
-import { glob } from 'astro/loaders';
+import { glob, file } from 'astro/loaders';
 
 const role = z.enum(['tank', 'raid', 'adds', 'move', 'heal', 'dispel', 'interrupt']);
 
@@ -62,4 +62,24 @@ const trashGroups = defineCollection({
   }),
 });
 
-export const collections = { bosses, trashGroups };
+const wowClass = z.enum([
+  'Warrior', 'Paladin', 'Hunter', 'Priest', 'Rogue',
+  'Shaman', 'Mage', 'Warlock', 'Druid',
+]);
+
+const raiders = defineCollection({
+  loader: file('./src/data/roster.json'),
+  schema: z.object({
+    id: z.string(),
+    player: z.string(),
+    character: z.string(),
+    class: wowClass,
+    role: z.enum(['tank', 'heal', 'melee', 'ranged']),
+    spec: z.string().optional(),
+    race: z.string().optional(),
+    notes: z.string().optional(),
+    avatar: z.string().optional(),
+  }),
+});
+
+export const collections = { bosses, trashGroups, raiders };
