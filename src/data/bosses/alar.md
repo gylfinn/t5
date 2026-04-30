@@ -34,7 +34,7 @@ phases:
   - num: "Fasi 1"
     name: "100% → fyrsta dauða"
     text: |
-      Al'ar lendir á einni platformu og fer svo random á næstu — <em>annaðhvort til vinstri, til hægri, eða beint yfir í hina hliðina á herberginu</em> (1↔4, 2↔5, 3↔6). Tveir platformutankar skiptast og fylgja honum: annar er þar sem Al'ar er nú, hinn þarf að vera tilbúinn að bregðast við hvaða af þremur átunum sem er. Þegar Al'ar flýgur, swappar þú. DPS fylgir honum. Þriðji tankurinn (Ember-tank, oftast paladin) heldur sig nálægt og er tilbúinn að grípa Embers strax og þeir spawna.
+      Al'ar lendir á platform næst honum við pull og fer svo random á næstu — <em>annaðhvort til vinstri, til hægri, eða beint yfir í hina hliðina á herberginu</em> (1↔4, 2↔5, 3↔6). Tveir platformutankar skiptast og fylgja honum: annar er þar sem Al'ar er nú, hinn þarf að vera tilbúinn að bregðast við hvaða af þremur átunum sem er. Þegar Al'ar flýgur, swappar þú. DPS fylgir honum. Þriðji tankurinn (Ember-tank, oftast paladin) heldur sig nálægt og er tilbúinn að grípa Embers strax og þeir spawna.
 
       Auk platform-flutningsins getur Al'ar líka flogið upp í miðjuna og castað <em>Flame Quills</em> — þá rignir eldi yfir alla platformana, og <b>allur raidinn verður að hoppa niður</b> til að forðast skaðann. Eftir Flame Quills lendir hann svo á platformu 2 eða 5.
 
@@ -58,7 +58,7 @@ tactics:
 images:
   - src: "/images/diagrams/alar-platforms.png"
     alt: "Al'ar herbergið með númeruðum platformum 1–6"
-    caption: "<b>Platform layout:</b> Al'ar lendir á einni platformu og fer svo random — annaðhvort til vinstri, til hægri, eða beint yfir í hina hliðina (1↔4, 2↔5, 3↔6)."
+    caption: "<b>Platform layout:</b> Al'ar lendir á platform næst honum i pulli og fer svo random — annaðhvort til vinstri, til hægri, eða beint yfir í hina hliðina (1↔4, 2↔5, 3↔6)."
 ---
 
-Endurfæðing er Al'ars uppáhalds-hobbí — sem þýðir að Hitaveitan þarf að drepa hann tvisvar á sama kvöldi. Hann lendir random á sex platformum og springur þegar hann fellur í Fasa 1; melee sem hoppar ekki niður í tíma fær brennandi kennslu í lóðréttri hreyfingu.
+Endurfæðing er uppáhaldshobbí Al’ars — sem þýðir að Hitaveitan þarf að leggja hann að velli tvisvar sama kvöldið. Hann birtist af handahófi á sex mismunandi stöðum og springur þegar hann hrynur í Fasa 1. Allir melee sem ná ekki að hoppa niður í tæka tíð fá svo óvænta kennslu í lóðréttri hreyfingu.
