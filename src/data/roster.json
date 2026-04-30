@@ -1,79 +1,125 @@
 [
   {
-    "id": "example-tank",
-    "player": "Player",
-    "character": "CharacterName",
-    "class": "Warrior",
+    "id": "bitlife",
+    "player": "Ármann",
+    "character": "Bitlfe",
+    "class": "Druid",
     "role": "tank",
-    "spec": "Protection",
-    "race": "Human",
-    "notes": "Main tank"
+    "spec": "Feral",
+    "race": "Tauren",
+    "avatar": "/images/raiders/druid.png"
   },
   {
-    "id": "example-paladin-tank",
-    "player": "Player",
-    "character": "CharacterName",
+    "id": "kusknafli",
+    "player": "Lord",
+    "character": "Kusknafli",
     "class": "Paladin",
     "role": "tank",
     "spec": "Protection",
-    "race": "Dwarf",
-    "notes": "Adds tank · Holy Light spammer"
+    "race": "Blood Elf",
+    "avatar": "/images/raiders/paladin.png"
   },
   {
-    "id": "example-druid-heal",
-    "player": "Player",
-    "character": "CharacterName",
+    "id": "froozh",
+    "player": "Freyr",
+    "character": "Froozh",
     "class": "Druid",
     "role": "heal",
     "spec": "Restoration",
-    "race": "Night Elf"
+    "race": "Tauren",
+    "avatar": "/images/raiders/druid.png"
   },
   {
-    "id": "example-priest-heal",
-    "player": "Player",
-    "character": "CharacterName",
+    "id": "nony",
+    "player": "Sigurlaugur 'Nonni'",
+    "character": "Nony",
     "class": "Priest",
     "role": "heal",
-    "spec": "Holy",
-    "race": "Draenei"
+    "spec": "Discipline",
+    "race": "Blood Elf",
+    "avatar": "/images/raiders/priest.png"
   },
   {
-    "id": "example-rogue",
-    "player": "Player",
-    "character": "CharacterName",
-    "class": "Rogue",
+    "id": "skarphedinn",
+    "player": "Bragi Lárusson",
+    "character": "Skarphéðinn",
+    "class": "Paladin",
     "role": "melee",
-    "spec": "Combat",
-    "race": "Human",
-    "notes": "Kick rotation"
+    "spec": "Retribution",
+    "race": "Blood Elf",
+    "notes": "Blessup lads",
+    "avatar": "/images/raiders/paladin.png"
   },
   {
-    "id": "example-warlock",
-    "player": "Player",
-    "character": "CharacterName",
+    "id": "vonweirdo",
+    "player": "Gylfi",
+    "character": "Vonweirdo",
     "class": "Warlock",
     "role": "ranged",
-    "spec": "Affliction",
-    "race": "Gnome",
-    "notes": "Caribdis tank-team"
+    "spec": "Destruction",
+    "race": "Orc",
+    "avatar": "/images/raiders/warlock.png"
   },
   {
-    "id": "example-mage",
-    "player": "Player",
-    "character": "CharacterName",
+    "id": "allz",
+    "player": "Alexander",
+    "character": "Allz",
     "class": "Mage",
     "role": "ranged",
-    "spec": "Frost",
-    "race": "Gnome"
+    "spec": "Fire",
+    "race": "Blood Elf",
+    "avatar": "/images/raiders/mage.png"
   },
   {
-    "id": "example-hunter",
-    "player": "Player",
-    "character": "CharacterName",
+    "id": "kiobriggs",
+    "player": "Daði 'Milftamer'",
+    "character": "Kiobriggs",
     "class": "Hunter",
     "role": "ranged",
     "spec": "Beast Mastery",
-    "race": "Night Elf",
-    "notes": "Strider kiter"
+    "race": "Orc",
+    "notes": "Meter padder",
+    "avatar": "/images/raiders/hunter.png"
+  },
+  {
+    "id": "furnity",
+    "player": "Ágúst 'Koddur'",
+    "character": "Furnity",
+    "class": "Druid",
+    "role": "ranged",
+    "spec": "Balance",
+    "race": "Tauren",
+    "notes": "Huge Pumper",
+    "avatar": "/images/raiders/druid.png"
+  },
+  {
+    "id": "fnrx",
+    "player": "Fannar",
+    "character": "Fnrx",
+    "class": "Shaman",
+    "role": "heal",
+    "spec": "Resto",
+    "race": "Orc",
+    "avatar": "/images/raiders/shaman.png"
+  },
+  {
+    "id": "oskird",
+    "player": "Snorri",
+    "character": "Óskírð",
+    "class": "Rogue",
+    "role": "melee",
+    "spec": "Combat",
+    "race": "Urc",
+    "avatar": "/images/raiders/rogue.png"
+  },
+  {
+    "id": "ofermd",
+    "player": "Arnþór",
+    "character": "Ófermd",
+    "class": "Rogue",
+    "role": "melee",
+    "spec": "Assassination",
+    "race": "Undead",
+    "avatar": "/images/raiders/rogue.png"
   }
 ]

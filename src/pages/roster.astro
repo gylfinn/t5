@@ -6,6 +6,10 @@ import TOC from '../components/TOC.astro';
 const bosses = (await getCollection('bosses')).sort((a, b) => a.data.order - b.data.order);
 const raiders = await getCollection('raiders');
 
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const avatarUrl = (p: string | undefined) =>
+  p ? (p.startsWith('/') ? base + p : p) : null;
+
 type Role = 'tank' | 'heal' | 'melee' | 'ranged';
 const roleOrder: Role[] = ['tank', 'heal', 'melee', 'ranged'];
 const roleLabels: Record<Role, string> = {
@@ -40,7 +44,7 @@ const total = raiders.length;
   <header class="roster-hero">
     <div class="roster-hero-eyebrow">Áhöfnin</div>
     <h1>Roster</h1>
-    <p class="roster-sub">{total} raiderar · 25-manna lið Hitaveitunnar</p>
+    <p class="roster-sub">Hitaveitu raiders eru með alvöru vinnu, börn í rúminu, og of mikla persónulega reynslu af Flame Strike. Hitaveitan er kannski versta guildið á Outland — en við mætum alltaf á föstudögum og deyjum áreiðanlega á sama stað í Fasa 2.</p>
   </header>
 
   <main class="roster-container">
@@ -54,7 +58,13 @@ const total = raiders.length;
         <div class="roster-grid">
           {byRole[role].map(r => (
             <article class="raider-card" data-class={r.data.class.toLowerCase()}>
-              <div class="raider-icon" aria-hidden="true">{r.data.class.charAt(0)}</div>
+              <div class:list={['raider-icon', r.data.avatar && 'has-avatar']} aria-hidden="true">
+                {r.data.avatar ? (
+                  <img src={avatarUrl(r.data.avatar)} alt="" loading="lazy" decoding="async" />
+                ) : (
+                  <span class="raider-icon-letter">{r.data.class.charAt(0)}</span>
+                )}
+              </div>
               <div class="raider-titles">
                 <h3 class="raider-character">{r.data.character}</h3>
                 <div class="raider-player">{r.data.player}</div>
@@ -168,7 +178,7 @@ const total = raiders.length;
     border-radius: 10px;
     padding: 14px 16px;
     display: grid;
-    grid-template-columns: 44px 1fr;
+    grid-template-columns: 56px 1fr;
     grid-template-areas:
       "icon titles"
       "icon meta"
@@ -183,18 +193,26 @@ const total = raiders.length;
   }
   .raider-icon {
     grid-area: icon;
-    width: 44px; height: 44px;
+    width: 56px; height: 56px;
     border-radius: 50%;
+    overflow: hidden;
     display: flex; align-items: center; justify-content: center;
     font-family: 'Cinzel', serif;
-    font-size: 22px;
+    font-size: 24px;
     font-weight: 700;
     background: rgba(0, 0, 0, 0.4);
     border: 2px solid var(--border-strong);
-    transition: border-color 0.2s, box-shadow 0.2s;
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
     align-self: start;
     grid-row: span 2;
   }
+  .raider-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .raider-card:hover .raider-icon { transform: scale(1.06); }
   .raider-titles { grid-area: titles; min-width: 0; }
   .raider-character {
     font-family: 'Cinzel', serif;
