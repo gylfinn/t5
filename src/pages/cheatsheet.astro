@@ -1,0 +1,347 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import DifficultySkulls from '../components/DifficultySkulls.astro';
+import TOC from '../components/TOC.astro';
+
+const all = (await getCollection('bosses')).sort((a, b) => a.data.order - b.data.order);
+const tk = all.filter(b => b.data.raid === 'tk');
+const ssc = all.filter(b => b.data.raid === 'ssc');
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const portraitUrl = (p: string | undefined) =>
+  p ? (p.startsWith('/') ? base + p : p) : null;
+
+const findStat = (boss: typeof all[number], key: string) =>
+  boss.data.stats.find(s => s.k === key)?.v ?? '—';
+
+const fightTime = (boss: typeof all[number]) => {
+  const t = findStat(boss, 'Bardagatími');
+  return t === '—' ? findStat(boss, 'Berserk') : t;
+};
+---
+<Base title="Cheat Sheet — Hitaveitan T5 | TBC Anniversary">
+  <TOC bosses={all} variant="cheatsheet" />
+
+  <header class="cs-hero">
+    <div class="cs-hero-eyebrow">Á-meðan-bardagi yfirlit</div>
+    <h1>Cheat Sheet</h1>
+    <p class="cs-sub">Tíu bossar á einni síðu. Þrjú lykilatriði per boss. Geymdu á öðrum skjá á raid-kvöldum. (Nema þú sért Bragi Skarphéðinn)</p>
+  </header>
+
+  <main class="cs-container">
+    <section class="cs-raid">
+      <div class="cs-raid-head">
+        <span class="cs-raid-badge">Hluti I</span>
+        <h2>Tempest Keep: The Eye</h2>
+        <span class="cs-raid-meta">Netherstorm · 4 bossar</span>
+      </div>
+      <div class="cs-grid">
+        {tk.map(boss => (
+          <article class="cs-card" data-raid="tk">
+            <div class="cs-card-head">
+              {portraitUrl(boss.data.portrait) && (
+                <div class="cs-portrait">
+                  <img src={portraitUrl(boss.data.portrait)} alt="" loading="lazy" decoding="async" />
+                </div>
+              )}
+              <div class="cs-titles">
+                <div class="cs-num-row">
+                  <span class="cs-num">{String(boss.data.order).padStart(2, '0')}</span>
+                  <h3>{boss.data.tocLabel ?? boss.data.name}</h3>
+                </div>
+                <div class="cs-tagline">{boss.data.tagline}</div>
+              </div>
+              <DifficultySkulls level={boss.data.difficulty} />
+            </div>
+            <div class="cs-stats">
+              <span><b>HP</b> {findStat(boss, 'HP')}</span>
+              <span><b>Tankar</b> {findStat(boss, 'Tankar')}</span>
+              <span><b>Tími</b> {fightTime(boss)}</span>
+            </div>
+            {boss.data.tldr && (
+              <ol class="cs-tldr">
+                {boss.data.tldr.map(item => <li set:html={item} />)}
+              </ol>
+            )}
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="cs-raid">
+      <div class="cs-raid-head">
+        <span class="cs-raid-badge">Hluti II</span>
+        <h2>Serpentshrine Cavern</h2>
+        <span class="cs-raid-meta">Coilfang Reservoir · 6 bossar</span>
+      </div>
+      <div class="cs-grid">
+        {ssc.map(boss => (
+          <article class="cs-card" data-raid="ssc">
+            <div class="cs-card-head">
+              {portraitUrl(boss.data.portrait) && (
+                <div class="cs-portrait">
+                  <img src={portraitUrl(boss.data.portrait)} alt="" loading="lazy" decoding="async" />
+                </div>
+              )}
+              <div class="cs-titles">
+                <div class="cs-num-row">
+                  <span class="cs-num">{String(boss.data.order).padStart(2, '0')}</span>
+                  <h3>{boss.data.tocLabel ?? boss.data.name}</h3>
+                </div>
+                <div class="cs-tagline">{boss.data.tagline}</div>
+              </div>
+              <DifficultySkulls level={boss.data.difficulty} />
+            </div>
+            <div class="cs-stats">
+              <span><b>HP</b> {findStat(boss, 'HP')}</span>
+              <span><b>Tankar</b> {findStat(boss, 'Tankar')}</span>
+              <span><b>Tími</b> {fightTime(boss)}</span>
+            </div>
+            {boss.data.tldr && (
+              <ol class="cs-tldr">
+                {boss.data.tldr.map(item => <li set:html={item} />)}
+              </ol>
+            )}
+          </article>
+        ))}
+      </div>
+    </section>
+  </main>
+
+  <footer class="cs-footer">
+    <a href={`${base}/`} class="cs-back">← Til baka í aðalleiðarvísi</a>
+    <div>Hitaveitan · TBC Anniversary Phase 2</div>
+  </footer>
+</Base>
+
+<style>
+  .cs-hero {
+    padding: 56px 32px 28px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+  }
+  .cs-hero-eyebrow {
+    color: var(--fire);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .cs-hero h1 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(34px, 5vw, 52px);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.1;
+    margin-bottom: 12px;
+    background: linear-gradient(180deg, #fff 0%, var(--fire) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .cs-sub {
+    color: var(--text-dim);
+    font-size: 15px;
+    max-width: 620px;
+    margin: 0 auto;
+  }
+
+  .cs-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px;
+  }
+
+  .cs-raid {
+    margin-bottom: 56px;
+  }
+  .cs-raid-head {
+    display: flex; align-items: baseline; gap: 14px;
+    margin-bottom: 20px;
+    padding-bottom: 14px;
+    border-bottom: 2px solid var(--border-strong);
+    flex-wrap: wrap;
+  }
+  .cs-raid-badge {
+    color: var(--gold);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    background: rgba(244, 184, 41, 0.10);
+    border: 1px solid var(--border-strong);
+    border-radius: 4px;
+  }
+  .cs-raid-head h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 26px;
+    color: #fff;
+    flex: 0 1 auto;
+  }
+  .cs-raid-meta {
+    color: var(--text-muted);
+    font-size: 13px;
+    margin-left: auto;
+  }
+
+  .cs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    gap: 18px;
+  }
+
+  .cs-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 18px 18px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .cs-card:hover {
+    border-color: var(--border-strong);
+    transform: translateY(-2px);
+  }
+  .cs-card-head {
+    display: grid;
+    grid-template-columns: 56px 1fr auto;
+    gap: 14px;
+    align-items: center;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px dashed var(--border);
+  }
+  .cs-portrait {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid var(--border-strong);
+    background: rgba(0,0,0,0.4);
+  }
+  .cs-portrait img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .cs-titles { min-width: 0; }
+  .cs-num-row {
+    display: flex; align-items: baseline; gap: 10px;
+    margin-bottom: 2px;
+  }
+  .cs-num {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--gold-dim);
+    letter-spacing: 1px;
+  }
+  .cs-titles h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 18px;
+    color: #fff;
+    line-height: 1.2;
+    font-weight: 600;
+  }
+  .cs-tagline {
+    color: var(--gold);
+    font-size: 12px;
+    font-style: italic;
+  }
+  .cs-card .difficulty .lbl { display: none; }
+  .cs-card .skulls { gap: 2px; }
+  .cs-card .skull { width: 11px; height: 11px; }
+
+  .cs-stats {
+    display: flex; flex-wrap: wrap; gap: 14px 18px;
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-bottom: 12px;
+  }
+  .cs-stats b {
+    color: var(--text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-right: 4px;
+    font-size: 10px;
+  }
+
+  .cs-tldr {
+    list-style: none;
+    counter-reset: cs-tldr;
+    padding: 0;
+    margin: 0;
+    display: flex; flex-direction: column; gap: 7px;
+  }
+  .cs-tldr li {
+    position: relative;
+    counter-increment: cs-tldr;
+    padding-left: 28px;
+    color: var(--text);
+    font-size: 13.5px;
+    line-height: 1.45;
+  }
+  .cs-tldr li::before {
+    content: counter(cs-tldr);
+    position: absolute;
+    left: 0; top: 1px;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: rgba(255, 123, 48, 0.15);
+    color: var(--fire);
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .cs-tldr li b, .cs-tldr li strong { color: var(--fire); font-weight: 700; }
+  .cs-tldr li em { color: var(--gold); font-style: normal; font-weight: 600; }
+
+  .cs-footer {
+    text-align: center;
+    padding: 32px 32px 60px;
+    border-top: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 13px;
+    font-family: 'Cinzel', serif;
+  }
+  .cs-back {
+    display: inline-block;
+    color: var(--gold);
+    text-decoration: none;
+    margin-bottom: 14px;
+    font-style: italic;
+  }
+  .cs-back:hover { color: var(--fire); }
+
+  @media (max-width: 540px) {
+    .cs-nav-inner { padding: 12px 16px; gap: 12px; }
+    .cs-container { padding: 20px 16px; }
+    .cs-grid { grid-template-columns: 1fr; }
+    .cs-raid-meta { width: 100%; margin-left: 0; }
+    .cs-raid-head h2 { font-size: 22px; }
+  }
+
+  @media print {
+    .cs-nav, .cs-footer { display: none; }
+    .cs-hero { padding: 16px 0 12px; border: 0; }
+    .cs-hero h1 { color: #000; -webkit-text-fill-color: #000; font-size: 24px; }
+    .cs-hero-eyebrow, .cs-sub { color: #555; }
+    body { background: #fff; color: #000; }
+    .cs-card {
+      background: #fff;
+      border: 1px solid #999;
+      page-break-inside: avoid;
+      box-shadow: none;
+    }
+    .cs-titles h3 { color: #000; }
+    .cs-tagline { color: #555; }
+    .cs-tldr li { color: #000; }
+    .cs-tldr li::before { background: #eee; color: #000; border: 1px solid #999; }
+    .cs-tldr li b, .cs-tldr li strong { color: #000; }
+    .cs-stats, .cs-stats b { color: #555; }
+    .cs-raid-head h2 { color: #000; }
+    .cs-raid-badge { color: #000; background: #eee; }
+    .cs-raid { page-break-inside: avoid; }
+    .cs-grid { gap: 8px; }
+    .progress { display: none; }
+  }
+</style>

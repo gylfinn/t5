@@ -22,3 +22,6 @@ pnpm-debug.log*
 
 # extraction scripts + intermediate artifacts (xlsx unzip, downloaded wiki pages, etc.)
 tmp/
+
+# Playwright/MCP test artifacts
+.playwright-mcp/

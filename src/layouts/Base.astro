@@ -62,27 +62,27 @@ const { title, description = 'Ítarlegur leiðarvísir fyrir Tempest Keep og Ser
       targets.forEach(el => io.observe(el));
     };
 
-    // TOC scrollspy: highlight the current section + bubble up to parent dropdown
+    // Topnav scrollspy: highlight the current section + bubble up to mega-menu trigger
     const setupScrollspy = () => {
-      const links = document.querySelectorAll<HTMLAnchorElement>('.toc-links a');
+      const links = document.querySelectorAll<HTMLAnchorElement>('.topnav-links a, .megamenu a');
       if (!links.length) return;
       const linkByHash = new Map<string, HTMLAnchorElement>();
       links.forEach(a => {
         const hash = a.getAttribute('href');
         if (hash?.startsWith('#')) linkByHash.set(hash.slice(1), a);
       });
-      const dropdowns = document.querySelectorAll<HTMLElement>('.toc-dropdown');
+      const megamenus = document.querySelectorAll<HTMLElement>('.megamenu');
       const targets = Array.from(document.querySelectorAll<HTMLElement>('section[id], article[id]'));
       const io = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             const id = entry.target.id;
             links.forEach(a => a.classList.remove('active'));
-            dropdowns.forEach(d => d.setAttribute('data-active', 'false'));
+            megamenus.forEach(d => d.setAttribute('data-active', 'false'));
             const link = linkByHash.get(id);
             if (link) {
               link.classList.add('active');
-              const parent = link.closest<HTMLElement>('.toc-dropdown');
+              const parent = link.closest<HTMLElement>('.megamenu');
               if (parent) parent.setAttribute('data-active', 'true');
             }
           }
@@ -91,18 +91,18 @@ const { title, description = 'Ítarlegur leiðarvísir fyrir Tempest Keep og Ser
       targets.forEach(t => io.observe(t));
     };
 
-    // Dropdown tap-toggle (mobile/touch); desktop uses CSS :hover/:focus-within
+    // Mega-menu tap-toggle (mobile/touch); desktop uses CSS :hover/:focus-within
     const setupDropdowns = () => {
-      const dropdowns = Array.from(document.querySelectorAll<HTMLElement>('.toc-dropdown'));
+      const dropdowns = Array.from(document.querySelectorAll<HTMLElement>('.megamenu'));
       if (!dropdowns.length) return;
 
       const closeAll = () => dropdowns.forEach(d => {
         d.setAttribute('data-open', 'false');
-        d.querySelector('.toc-trigger')?.setAttribute('aria-expanded', 'false');
+        d.querySelector('.megamenu-trigger')?.setAttribute('aria-expanded', 'false');
       });
 
       dropdowns.forEach(dd => {
-        const trigger = dd.querySelector<HTMLButtonElement>('.toc-trigger');
+        const trigger = dd.querySelector<HTMLButtonElement>('.megamenu-trigger');
         if (!trigger) return;
         trigger.addEventListener('click', (e) => {
           e.stopPropagation();
@@ -124,7 +124,7 @@ const { title, description = 'Ítarlegur leiðarvísir fyrir Tempest Keep og Ser
       });
 
       document.addEventListener('click', (e) => {
-        if (!(e.target as Element).closest('.toc-dropdown')) closeAll();
+        if (!(e.target as Element).closest('.megamenu')) closeAll();
       });
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') closeAll();

@@ -1,0 +1,74 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import DifficultySkulls from './DifficultySkulls.astro';
+
+interface Props {
+  bosses: CollectionEntry<'bosses'>[];
+  linkPrefix?: string;
+}
+
+const { bosses, linkPrefix = '' } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const tk = bosses.filter(b => b.data.raid === 'tk').sort((a, b) => a.data.order - b.data.order);
+const ssc = bosses.filter(b => b.data.raid === 'ssc').sort((a, b) => a.data.order - b.data.order);
+
+const portraitUrl = (p: string | undefined) =>
+  p ? (p.startsWith('/') ? base + p : p) : null;
+---
+<div class="megamenu" data-open="false" data-active="false">
+  <button
+    type="button"
+    class="megamenu-trigger"
+    aria-expanded="false"
+    aria-controls="megamenu-panel"
+  >
+    <span>Bossar</span>
+    <svg class="caret" viewBox="0 0 12 8" width="10" height="8" aria-hidden="true">
+      <path d="M1 1l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  </button>
+  <div id="megamenu-panel" class="megamenu-panel" role="menu" aria-label="Bossar">
+    <div class="megamenu-grid">
+      <section class="megamenu-col">
+        <div class="megamenu-col-head">
+          <span class="megamenu-col-label">Hluti I</span>
+          <span class="megamenu-col-title">The Eye</span>
+        </div>
+        <a href={`${linkPrefix}#tk`} class="megamenu-row megamenu-row-meta" role="menuitem">Yfirlit</a>
+        {tk.map(b => (
+          <a href={`${linkPrefix}#${b.data.slug}`} class="megamenu-row megamenu-row-boss" role="menuitem">
+            {portraitUrl(b.data.portrait) && (
+              <div class="megamenu-portrait">
+                <img src={portraitUrl(b.data.portrait)} alt="" loading="lazy" decoding="async" />
+              </div>
+            )}
+            <span class="megamenu-num">{String(b.data.order).padStart(2, '0')}</span>
+            <span class="megamenu-name">{b.data.tocLabel ?? b.data.name}</span>
+            <DifficultySkulls level={b.data.difficulty} compact />
+          </a>
+        ))}
+        <a href={`${linkPrefix}#tk-trash`} class="megamenu-row megamenu-row-meta" role="menuitem">Trash</a>
+      </section>
+      <section class="megamenu-col">
+        <div class="megamenu-col-head">
+          <span class="megamenu-col-label">Hluti II</span>
+          <span class="megamenu-col-title">SSC</span>
+        </div>
+        <a href={`${linkPrefix}#ssc`} class="megamenu-row megamenu-row-meta" role="menuitem">Yfirlit</a>
+        {ssc.map(b => (
+          <a href={`${linkPrefix}#${b.data.slug}`} class="megamenu-row megamenu-row-boss" role="menuitem">
+            {portraitUrl(b.data.portrait) && (
+              <div class="megamenu-portrait">
+                <img src={portraitUrl(b.data.portrait)} alt="" loading="lazy" decoding="async" />
+              </div>
+            )}
+            <span class="megamenu-num">{String(b.data.order).padStart(2, '0')}</span>
+            <span class="megamenu-name">{b.data.tocLabel ?? b.data.name}</span>
+            <DifficultySkulls level={b.data.difficulty} compact />
+          </a>
+        ))}
+        <a href={`${linkPrefix}#ssc-trash`} class="megamenu-row megamenu-row-meta" role="menuitem">Trash</a>
+      </section>
+    </div>
+  </div>
+</div>

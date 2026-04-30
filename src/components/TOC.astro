@@ -1,44 +1,51 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import TocDropdown from './TocDropdown.astro';
+import BossesMegaMenu from './BossesMegaMenu.astro';
 
 interface Props {
   bosses: CollectionEntry<'bosses'>[];
+  variant?: 'full' | 'cheatsheet';
 }
 
-const { bosses } = Astro.props;
-const tk = bosses.filter(b => b.data.raid === 'tk').sort((a, b) => a.data.order - b.data.order);
-const ssc = bosses.filter(b => b.data.raid === 'ssc').sort((a, b) => a.data.order - b.data.order);
-
-const tkItems = [
-  { href: '#tk', label: 'Yfirlit', kind: 'overview' as const },
-  ...tk.map(b => ({
-    href: `#${b.data.slug}`,
-    label: b.data.tocLabel ?? b.data.name,
-    num: String(b.data.order).padStart(2, '0'),
-    kind: 'boss' as const,
-  })),
-  { href: '#tk-trash', label: 'Trash', kind: 'trash' as const },
-];
-
-const sscItems = [
-  { href: '#ssc', label: 'Yfirlit', kind: 'overview' as const },
-  ...ssc.map(b => ({
-    href: `#${b.data.slug}`,
-    label: b.data.tocLabel ?? b.data.name,
-    num: String(b.data.order).padStart(2, '0'),
-    kind: 'boss' as const,
-  })),
-  { href: '#ssc-trash', label: 'Trash', kind: 'trash' as const },
-];
+const { bosses, variant = 'full' } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const homeHref = variant === 'cheatsheet' ? `${base}/` : '#top';
+const linkPrefix = variant === 'cheatsheet' ? `${base}/` : '';
 ---
-<nav class="toc">
-  <div class="toc-inner">
-    <a href="#top" class="toc-brand">⚔ TBC Anniversary · Phase 2</a>
-    <div class="toc-links">
-      <TocDropdown trigger="The Eye" panelId="toc-panel-tk" items={tkItems} />
-      <TocDropdown trigger="SSC" panelId="toc-panel-ssc" items={sscItems} />
-      <a href="#tips" class="toc-link">Ráðleggingar</a>
+<nav class="topnav">
+  <div class="topnav-inner">
+    <a href={homeHref} class="topnav-brand">
+      <span class="topnav-brand-icon" aria-hidden="true">⚔</span>
+      <span class="topnav-brand-text">
+        <span class="topnav-brand-line-1">Hitaveitan</span>
+        <span class="topnav-brand-line-2">T5 Raid Guide</span>
+      </span>
+    </a>
+    <div class="topnav-links">
+      <BossesMegaMenu bosses={bosses} linkPrefix={linkPrefix} />
+      {variant === 'full' && (
+        <>
+          <a href="#tips" class="topnav-link" aria-label="Tips">
+            <span class="topnav-link-label">Tips</span>
+          </a>
+          <a href={`${base}/cheatsheet`} class="topnav-link topnav-link-cheat" aria-label="Cheat Sheet">
+            <span aria-hidden="true">⚡</span>
+            <span class="topnav-link-label">Cheat Sheet</span>
+          </a>
+        </>
+      )}
+      {variant === 'cheatsheet' && (
+        <>
+          <a href={`${base}/`} class="topnav-link" aria-label="Til baka í aðalleiðarvísi">
+            <span aria-hidden="true">←</span>
+            <span class="topnav-link-label">Til baka</span>
+          </a>
+          <button type="button" class="topnav-link topnav-print-btn" onclick="window.print()" aria-label="Prenta">
+            <span aria-hidden="true">🖨</span>
+            <span class="topnav-link-label">Prenta</span>
+          </button>
+        </>
+      )}
     </div>
   </div>
 </nav>
