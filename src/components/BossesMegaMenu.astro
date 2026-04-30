@@ -34,9 +34,9 @@ const portraitUrl = (p: string | undefined) =>
           <span class="megamenu-col-label">Hluti I</span>
           <span class="megamenu-col-title">The Eye</span>
         </div>
-        <a href={`${linkPrefix}#tk`} class="megamenu-row megamenu-row-meta" role="menuitem">Yfirlit</a>
-        {tk.map(b => (
-          <a href={`${linkPrefix}#${b.data.slug}`} class="megamenu-row megamenu-row-boss" role="menuitem">
+        <a href={`${linkPrefix}#tk`} class="megamenu-row megamenu-row-meta" role="menuitem" style="--i: 0">Yfirlit</a>
+        {tk.map((b, i) => (
+          <a href={`${linkPrefix}#${b.data.slug}`} class="megamenu-row megamenu-row-boss" role="menuitem" style={`--i: ${i + 1}`}>
             {portraitUrl(b.data.portrait) && (
               <div class="megamenu-portrait">
                 <img src={portraitUrl(b.data.portrait)} alt="" loading="lazy" decoding="async" />
@@ -47,16 +47,16 @@ const portraitUrl = (p: string | undefined) =>
             <DifficultySkulls level={b.data.difficulty} compact />
           </a>
         ))}
-        <a href={`${linkPrefix}#tk-trash`} class="megamenu-row megamenu-row-meta" role="menuitem">Trash</a>
+        <a href={`${linkPrefix}#tk-trash`} class="megamenu-row megamenu-row-meta" role="menuitem" style={`--i: ${tk.length + 1}`}>Trash</a>
       </section>
       <section class="megamenu-col">
         <div class="megamenu-col-head">
           <span class="megamenu-col-label">Hluti II</span>
           <span class="megamenu-col-title">SSC</span>
         </div>
-        <a href={`${linkPrefix}#ssc`} class="megamenu-row megamenu-row-meta" role="menuitem">Yfirlit</a>
-        {ssc.map(b => (
-          <a href={`${linkPrefix}#${b.data.slug}`} class="megamenu-row megamenu-row-boss" role="menuitem">
+        <a href={`${linkPrefix}#ssc`} class="megamenu-row megamenu-row-meta" role="menuitem" style="--i: 0">Yfirlit</a>
+        {ssc.map((b, i) => (
+          <a href={`${linkPrefix}#${b.data.slug}`} class="megamenu-row megamenu-row-boss" role="menuitem" style={`--i: ${i + 1}`}>
             {portraitUrl(b.data.portrait) && (
               <div class="megamenu-portrait">
                 <img src={portraitUrl(b.data.portrait)} alt="" loading="lazy" decoding="async" />
@@ -67,7 +67,7 @@ const portraitUrl = (p: string | undefined) =>
             <DifficultySkulls level={b.data.difficulty} compact />
           </a>
         ))}
-        <a href={`${linkPrefix}#ssc-trash`} class="megamenu-row megamenu-row-meta" role="menuitem">Trash</a>
+        <a href={`${linkPrefix}#ssc-trash`} class="megamenu-row megamenu-row-meta" role="menuitem" style={`--i: ${ssc.length + 1}`}>Trash</a>
       </section>
     </div>
   </div>

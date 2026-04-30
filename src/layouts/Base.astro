@@ -99,6 +99,22 @@ const ogImageUrl = Astro.site
       targets.forEach(el => io.observe(el));
     };
 
+    // Boss difficulty-skull ignition: ignite left-to-right when each card enters view.
+    // Runs in all browsers (independent of the reveals fallback), fires once per .boss.
+    const setupSkullIgnition = () => {
+      const targets = document.querySelectorAll<HTMLElement>('.boss');
+      if (!targets.length) return;
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('ignited');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.25, rootMargin: '0px 0px -10% 0px' });
+      targets.forEach(el => io.observe(el));
+    };
+
     // Topnav scrollspy: highlight the current section + bubble up to mega-menu trigger
     const setupScrollspy = () => {
       const links = document.querySelectorAll<HTMLAnchorElement>('.topnav-links a, .megamenu a');
@@ -168,7 +184,7 @@ const ogImageUrl = Astro.site
       });
     };
 
-    const boot = () => { init(); setupReveals(); setupScrollspy(); setupDropdowns(); };
+    const boot = () => { init(); setupReveals(); setupSkullIgnition(); setupScrollspy(); setupDropdowns(); };
     document.addEventListener('astro:page-load', boot);
     if (document.readyState !== 'loading') boot();
     else document.addEventListener('DOMContentLoaded', boot);

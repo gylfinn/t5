@@ -59,6 +59,117 @@
   animation: hero-ember 9s ease-in-out infinite;
 }
 
+/* --- Hero load orchestration: cascading entrance --- */
+@keyframes hero-cascade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+    filter: blur(3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+.hero-cascade {
+  opacity: 0;
+  animation: hero-cascade-up 720ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: calc(var(--cascade-i, 0) * 110ms + 80ms);
+}
+.hero .pills .pill {
+  opacity: 0;
+  animation: hero-cascade-up 560ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.hero .pills .pill:nth-child(1) { animation-delay: 480ms; }
+.hero .pills .pill:nth-child(2) { animation-delay: 540ms; }
+.hero .pills .pill:nth-child(3) { animation-delay: 600ms; }
+.hero .pills .pill:nth-child(4) { animation-delay: 660ms; }
+.hero .pills .pill:nth-child(5) { animation-delay: 720ms; }
+
+/* --- Hero ember particles drifting upward --- */
+.hero-embers {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+.ember {
+  position: absolute;
+  bottom: -8px;
+  width: 4px;
+  height: 4px;
+  background: var(--fire);
+  border-radius: 50%;
+  filter: blur(0.5px) drop-shadow(0 0 6px var(--fire));
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: ember-drift linear infinite;
+}
+.ember:nth-child(1) { left: 12%; width: 4px; height: 4px; animation-duration: 8.5s;  animation-delay:  0.0s; --x-drift:  14px; }
+.ember:nth-child(2) { left: 28%; width: 3px; height: 3px; animation-duration: 11s;   animation-delay:  1.6s; --x-drift: -18px; }
+.ember:nth-child(3) { left: 50%; width: 5px; height: 5px; animation-duration: 9.5s;  animation-delay:  3.2s; --x-drift:  22px; }
+.ember:nth-child(4) { left: 72%; width: 3px; height: 3px; animation-duration: 12s;   animation-delay:  4.8s; --x-drift: -12px; }
+.ember:nth-child(5) { left: 88%; width: 4px; height: 4px; animation-duration: 8.8s;  animation-delay:  6.4s; --x-drift:  16px; }
+
+@keyframes ember-drift {
+  0%   { opacity: 0; transform: translate3d(0, 0, 0) scale(0.6); }
+  15%  { opacity: 0.85; }
+  60%  { opacity: 0.55; transform: translate3d(calc(var(--x-drift, 0) * 0.6), -55%, 0) scale(1); }
+  100% { opacity: 0; transform: translate3d(var(--x-drift, 0), -110%, 0) scale(0.4); }
+}
+
+/* Make sure hero text sits above the embers */
+.hero-eyebrow,
+.hero h1,
+.hero .subtitle,
+.hero .pills { position: relative; z-index: 1; }
+
+/* --- Mega-menu row stagger reveal when panel opens --- */
+.megamenu-row {
+  opacity: 0;
+  transform: translateY(-6px);
+  transition:
+    opacity 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.12s,
+    color 0.12s,
+    border-left-color 0.12s;
+}
+.megamenu[data-open="true"] .megamenu-row,
+.megamenu:focus-within .megamenu-row {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: calc(var(--i, 0) * 32ms + 60ms);
+}
+@media (hover: hover) {
+  .megamenu:hover .megamenu-row {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: calc(var(--i, 0) * 32ms + 60ms);
+  }
+}
+
+/* --- Boss difficulty skulls igniting left-to-right when card enters view --- */
+@keyframes skull-flare {
+  0%   { transform: scale(1);    filter: brightness(1)   drop-shadow(0 0 0  transparent); }
+  55%  { transform: scale(1.35); filter: brightness(1.9) drop-shadow(0 0 8px var(--fire)); }
+  100% { transform: scale(1);    filter: brightness(1)   drop-shadow(0 0 0  transparent); }
+}
+.boss.ignited .difficulty .skull.on {
+  animation-name: skull-flare, skull-pulse;
+  animation-duration: 480ms, 2.4s;
+  animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1), ease-in-out;
+  animation-iteration-count: 1, infinite;
+  animation-fill-mode: backwards, both;
+}
+.boss.ignited .difficulty .skull.on:nth-child(1) { animation-delay:   0ms,  540ms; }
+.boss.ignited .difficulty .skull.on:nth-child(2) { animation-delay:  90ms,  630ms; }
+.boss.ignited .difficulty .skull.on:nth-child(3) { animation-delay: 180ms,  720ms; }
+.boss.ignited .difficulty .skull.on:nth-child(4) { animation-delay: 270ms,  810ms; }
+.boss.ignited .difficulty .skull.on:nth-child(5) { animation-delay: 360ms,  900ms; }
+
 /* --- Reduced motion: kill everything moving --- */
 @media (prefers-reduced-motion: reduce) {
   .boss,
@@ -68,10 +179,16 @@
   .boss-figure,
   .reveal,
   .skull.on,
-  .hero::before {
+  .hero::before,
+  .hero-cascade,
+  .hero .pills .pill,
+  .ember,
+  .megamenu-row,
+  .boss.ignited .difficulty .skull.on {
     animation: none !important;
     transition: none !important;
     opacity: 1 !important;
     transform: none !important;
+    filter: none !important;
   }
 }
