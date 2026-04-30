@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://gylfinn.github.io/t5/sitemap-index.xml
