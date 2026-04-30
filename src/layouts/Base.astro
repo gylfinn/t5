@@ -10,6 +10,11 @@ interface Props {
 }
 
 const { title, description = 'Ítarlegur leiðarvísir fyrir Tempest Keep og Serpentshrine Cavern á TBC Anniversary serverunum.' } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const bgImageUrl = `${base}/images/hitaveitan_bg.svg`;
+const ogImageUrl = Astro.site
+  ? new URL(`${base}/images/hitaveitan_bg.png`, Astro.site).toString()
+  : `${base}/images/hitaveitan_bg.png`;
 ---
 <!DOCTYPE html>
 <html lang="is">
@@ -21,9 +26,41 @@ const { title, description = 'Ítarlegur leiðarvísir fyrir Tempest Keep og Ser
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
   <meta property="og:type" content="website" />
+  <meta property="og:image" content={ogImageUrl} />
+  <meta property="og:image:width" content="1920" />
+  <meta property="og:image:height" content="1080" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content={ogImageUrl} />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style is:global define:vars={{ bgImageUrl: `url('${bgImageUrl}')` }}>
+    body {
+      background-color: var(--bg);
+      background-image: var(--bgImageUrl);
+      background-position: center top;
+      background-size: cover;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+    }
+    /* Darkening overlay so content stays readable on top of the artwork */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(180deg,
+        rgba(10, 14, 21, 0.30) 0%,
+        rgba(10, 14, 21, 0.55) 35%,
+        rgba(10, 14, 21, 0.85) 70%,
+        rgba(10, 14, 21, 0.95) 100%);
+      z-index: -1;
+      pointer-events: none;
+    }
+    /* iOS / mobile fallback — fixed bg attachments cause jitter on touch scroll */
+    @media (max-width: 768px) {
+      body { background-attachment: scroll; }
+    }
+  </style>
   <ClientRouter />
 </head>
 <body>
