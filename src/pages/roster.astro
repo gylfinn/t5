@@ -10,6 +10,10 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const avatarUrl = (p: string | undefined) =>
   p ? (p.startsWith('/') ? base + p : p) : null;
 
+const LOGS_BASE_URL = 'https://fresh.warcraftlogs.com/character/EU/Spineshatter/';
+const logsUrlFor = (character: string, override?: string) =>
+  override ?? `${LOGS_BASE_URL}${encodeURIComponent(character)}`;
+
 type Role = 'tank' | 'heal' | 'melee' | 'ranged';
 const roleOrder: Role[] = ['tank', 'heal', 'melee', 'ranged'];
 const roleLabels: Record<Role, string> = {
@@ -57,15 +61,15 @@ const total = raiders.length;
         </header>
         <div class="roster-grid">
           {byRole[role].map(r => {
-            const Tag = (r.data.logsUrl ? 'a' : 'article') as 'a' | 'article';
-            const linkProps = r.data.logsUrl
-              ? { href: r.data.logsUrl, target: '_blank', rel: 'noopener noreferrer', 'aria-label': `${r.data.character} á Warcraft Logs` }
-              : {};
+            const href = logsUrlFor(r.data.character, r.data.logsUrl);
             return (
-              <Tag
-                class:list={['raider-card', r.data.logsUrl && 'is-link']}
+              <a
+                class="raider-card is-link"
                 data-class={r.data.class.toLowerCase()}
-                {...linkProps}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${r.data.character} á Warcraft Logs`}
               >
                 <div class:list={['raider-icon', r.data.avatar && 'has-avatar']} aria-hidden="true">
                   {r.data.avatar ? (
@@ -86,7 +90,7 @@ const total = raiders.length;
                   {r.data.race && <span class="raider-race">{r.data.race}</span>}
                 </div>
                 {r.data.notes && <p class="raider-notes">{r.data.notes}</p>}
-              </Tag>
+              </a>
             );
           })}
         </div>
