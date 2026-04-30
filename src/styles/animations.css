@@ -63,29 +63,29 @@
 @keyframes hero-cascade-up {
   from {
     opacity: 0;
-    transform: translateY(14px);
-    filter: blur(3px);
+    transform: translateY(36px) scale(0.96);
+    filter: blur(8px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
     filter: blur(0);
   }
 }
 .hero-cascade {
   opacity: 0;
-  animation: hero-cascade-up 720ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  animation-delay: calc(var(--cascade-i, 0) * 110ms + 80ms);
+  animation: hero-cascade-up 1100ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: calc(var(--cascade-i, 0) * 220ms + 120ms);
 }
 .hero .pills .pill {
   opacity: 0;
-  animation: hero-cascade-up 560ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: hero-cascade-up 800ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
-.hero .pills .pill:nth-child(1) { animation-delay: 480ms; }
-.hero .pills .pill:nth-child(2) { animation-delay: 540ms; }
-.hero .pills .pill:nth-child(3) { animation-delay: 600ms; }
-.hero .pills .pill:nth-child(4) { animation-delay: 660ms; }
-.hero .pills .pill:nth-child(5) { animation-delay: 720ms; }
+.hero .pills .pill:nth-child(1) { animation-delay:  900ms; }
+.hero .pills .pill:nth-child(2) { animation-delay: 1000ms; }
+.hero .pills .pill:nth-child(3) { animation-delay: 1100ms; }
+.hero .pills .pill:nth-child(4) { animation-delay: 1200ms; }
+.hero .pills .pill:nth-child(5) { animation-delay: 1300ms; }
 
 /* --- Hero ember particles drifting upward --- */
 .hero-embers {
@@ -97,27 +97,29 @@
 }
 .ember {
   position: absolute;
-  bottom: -8px;
-  width: 4px;
-  height: 4px;
+  bottom: -12px;
   background: var(--fire);
   border-radius: 50%;
-  filter: blur(0.5px) drop-shadow(0 0 6px var(--fire));
+  filter: blur(0.5px) drop-shadow(0 0 12px var(--fire)) drop-shadow(0 0 24px rgba(255, 123, 48, 0.5));
   opacity: 0;
   will-change: transform, opacity;
   animation: ember-drift linear infinite;
 }
-.ember:nth-child(1) { left: 12%; width: 4px; height: 4px; animation-duration: 8.5s;  animation-delay:  0.0s; --x-drift:  14px; }
-.ember:nth-child(2) { left: 28%; width: 3px; height: 3px; animation-duration: 11s;   animation-delay:  1.6s; --x-drift: -18px; }
-.ember:nth-child(3) { left: 50%; width: 5px; height: 5px; animation-duration: 9.5s;  animation-delay:  3.2s; --x-drift:  22px; }
-.ember:nth-child(4) { left: 72%; width: 3px; height: 3px; animation-duration: 12s;   animation-delay:  4.8s; --x-drift: -12px; }
-.ember:nth-child(5) { left: 88%; width: 4px; height: 4px; animation-duration: 8.8s;  animation-delay:  6.4s; --x-drift:  16px; }
+.ember:nth-child(1) { left:  8%; width: 5px; height: 5px; animation-duration:  9s;  animation-delay:  0.0s; --x-drift:  18px; }
+.ember:nth-child(2) { left: 18%; width: 4px; height: 4px; animation-duration: 11s;  animation-delay:  1.2s; --x-drift: -22px; }
+.ember:nth-child(3) { left: 30%; width: 6px; height: 6px; animation-duration: 10s;  animation-delay:  2.5s; --x-drift:  28px; }
+.ember:nth-child(4) { left: 42%; width: 4px; height: 4px; animation-duration:  8s;  animation-delay:  3.8s; --x-drift: -16px; }
+.ember:nth-child(5) { left: 56%; width: 7px; height: 7px; animation-duration: 12s;  animation-delay:  0.6s; --x-drift:  24px; }
+.ember:nth-child(6) { left: 68%; width: 4px; height: 4px; animation-duration:  9s;  animation-delay:  4.4s; --x-drift: -28px; }
+.ember:nth-child(7) { left: 78%; width: 5px; height: 5px; animation-duration: 11s;  animation-delay:  2.0s; --x-drift:  20px; }
+.ember:nth-child(8) { left: 88%; width: 6px; height: 6px; animation-duration: 10s;  animation-delay:  5.0s; --x-drift: -14px; }
+.ember:nth-child(9) { left: 95%; width: 4px; height: 4px; animation-duration:  8s;  animation-delay:  3.0s; --x-drift:  18px; }
 
 @keyframes ember-drift {
-  0%   { opacity: 0; transform: translate3d(0, 0, 0) scale(0.6); }
-  15%  { opacity: 0.85; }
-  60%  { opacity: 0.55; transform: translate3d(calc(var(--x-drift, 0) * 0.6), -55%, 0) scale(1); }
-  100% { opacity: 0; transform: translate3d(var(--x-drift, 0), -110%, 0) scale(0.4); }
+  0%   { opacity: 0;    transform: translate3d(0, 0, 0) scale(0.4); }
+  10%  { opacity: 0.95; }
+  60%  { opacity: 0.75; transform: translate3d(calc(var(--x-drift, 0) * 0.6), -55%, 0) scale(1.1); }
+  100% { opacity: 0;    transform: translate3d(var(--x-drift, 0), -110%, 0) scale(0.5); }
 }
 
 /* Make sure hero text sits above the embers */
@@ -129,10 +131,10 @@
 /* --- Mega-menu row stagger reveal when panel opens --- */
 .megamenu-row {
   opacity: 0;
-  transform: translateY(-6px);
+  transform: translateX(-12px);
   transition:
-    opacity 0.22s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
     background 0.12s,
     color 0.12s,
     border-left-color 0.12s;
@@ -140,35 +142,46 @@
 .megamenu[data-open="true"] .megamenu-row,
 .megamenu:focus-within .megamenu-row {
   opacity: 1;
-  transform: translateY(0);
-  transition-delay: calc(var(--i, 0) * 32ms + 60ms);
+  transform: translateX(0);
+  transition-delay: calc(var(--i, 0) * 55ms + 80ms);
 }
 @media (hover: hover) {
   .megamenu:hover .megamenu-row {
     opacity: 1;
-    transform: translateY(0);
-    transition-delay: calc(var(--i, 0) * 32ms + 60ms);
+    transform: translateX(0);
+    transition-delay: calc(var(--i, 0) * 55ms + 80ms);
   }
 }
 
 /* --- Boss difficulty skulls igniting left-to-right when card enters view --- */
 @keyframes skull-flare {
-  0%   { transform: scale(1);    filter: brightness(1)   drop-shadow(0 0 0  transparent); }
-  55%  { transform: scale(1.35); filter: brightness(1.9) drop-shadow(0 0 8px var(--fire)); }
-  100% { transform: scale(1);    filter: brightness(1)   drop-shadow(0 0 0  transparent); }
+  0%   { transform: scale(0.5) rotate(-12deg);  filter: brightness(2.5) drop-shadow(0 0 0   transparent); }
+  35%  { transform: scale(1.65) rotate(8deg);   filter: brightness(2.2) drop-shadow(0 0 14px var(--fire)) drop-shadow(0 0 26px rgba(255, 123, 48, 0.6)); }
+  70%  { transform: scale(0.92) rotate(-3deg);  filter: brightness(1.4) drop-shadow(0 0 8px  rgba(255, 123, 48, 0.4)); }
+  100% { transform: scale(1)    rotate(0);      filter: brightness(1)   drop-shadow(0 0 0   transparent); }
 }
 .boss.ignited .difficulty .skull.on {
   animation-name: skull-flare, skull-pulse;
-  animation-duration: 480ms, 2.4s;
+  animation-duration: 720ms, 2.4s;
   animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1), ease-in-out;
   animation-iteration-count: 1, infinite;
   animation-fill-mode: backwards, both;
 }
-.boss.ignited .difficulty .skull.on:nth-child(1) { animation-delay:   0ms,  540ms; }
-.boss.ignited .difficulty .skull.on:nth-child(2) { animation-delay:  90ms,  630ms; }
-.boss.ignited .difficulty .skull.on:nth-child(3) { animation-delay: 180ms,  720ms; }
-.boss.ignited .difficulty .skull.on:nth-child(4) { animation-delay: 270ms,  810ms; }
-.boss.ignited .difficulty .skull.on:nth-child(5) { animation-delay: 360ms,  900ms; }
+.boss.ignited .difficulty .skull.on:nth-child(1) { animation-delay:   0ms,  780ms; }
+.boss.ignited .difficulty .skull.on:nth-child(2) { animation-delay: 130ms,  910ms; }
+.boss.ignited .difficulty .skull.on:nth-child(3) { animation-delay: 260ms, 1040ms; }
+.boss.ignited .difficulty .skull.on:nth-child(4) { animation-delay: 390ms, 1170ms; }
+.boss.ignited .difficulty .skull.on:nth-child(5) { animation-delay: 520ms, 1300ms; }
+
+/* --- Boss card "kindle" — gold border-flash when each card enters view --- */
+@keyframes boss-kindle {
+  0%   { box-shadow: 0 0 0  0   rgba(244, 184, 41, 0); }
+  40%  { box-shadow: 0 0 32px 4px rgba(244, 184, 41, 0.45), 0 0 56px 8px rgba(255, 123, 48, 0.25); }
+  100% { box-shadow: 0 0 0  0   rgba(244, 184, 41, 0); }
+}
+.boss.ignited {
+  animation: boss-kindle 1400ms ease-out;
+}
 
 /* --- Reduced motion: kill everything moving --- */
 @media (prefers-reduced-motion: reduce) {
