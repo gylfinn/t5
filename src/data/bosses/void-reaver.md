@@ -11,7 +11,7 @@ stats:
   - { k: HP, v: "~4M" }
   - { k: Tegund, v: "Construct" }
   - { k: Fasar, v: "1" }
-  - { k: Tankar, v: "1" }
+  - { k: Tankar, v: "2-3" }
   - { k: Berserk, v: "10 mín" }
   - { k: Bardagatími, v: "~5 mín" }
 tldr:
