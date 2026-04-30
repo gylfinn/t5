@@ -14,9 +14,9 @@ stats:
   - { k: Resistance, v: "Engin" }
   - { k: Bardagatími, v: "~7 mín" }
 tldr:
-  - "Tank-swap þegar Al'ar flýgur til næstu platformu — fylgdu honum"
   - "Allir hoppa <b>NIÐUR</b> á Flame Quills <em>og</em> þegar hann deyr í Fasa 1"
   - "Paladin tekur Embers og dregur þá frá raidinu áður en þeir springa"
+  - "Spreada á Dive Bomb"
 mechanics:
   - role: raid
     name: Flame Quills
