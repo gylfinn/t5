@@ -577,6 +577,112 @@ nav.toc {
 .phase-block p { font-size: 14px; color: var(--text-dim); margin: 0; }
 .phase-block p + p { margin-top: 8px; }
 
+/* TL;DR strip — top-of-boss "if you read nothing else" callout */
+.tldr {
+  margin: 0 0 22px;
+  padding: 14px 18px 14px 20px;
+  background: linear-gradient(90deg, rgba(255, 123, 48, 0.10), rgba(255, 123, 48, 0.02));
+  border: 1px solid rgba(255, 123, 48, 0.30);
+  border-left: 3px solid var(--fire);
+  border-radius: 8px;
+}
+.tldr .head {
+  font-family: 'Cinzel', serif;
+  color: var(--fire);
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+.tldr ol {
+  list-style: none;
+  counter-reset: tldr;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.tldr li {
+  position: relative;
+  counter-increment: tldr;
+  padding-left: 30px;
+  color: var(--text);
+  font-size: 14.5px;
+  line-height: 1.5;
+  font-weight: 500;
+}
+.tldr li::before {
+  content: counter(tldr);
+  position: absolute;
+  left: 0;
+  top: 1px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(255, 123, 48, 0.18);
+  color: var(--fire);
+  font-family: 'Cinzel', serif;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.tldr li b,
+.tldr li strong { color: var(--fire); font-weight: 700; }
+.tldr li em { color: var(--gold); font-style: normal; font-weight: 600; }
+
+/* Role-specific tips grid */
+.role-tips {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+  margin: 6px 0 14px;
+}
+.role-tip-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold-dim);
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+.role-tip-card.role-tank { border-left-color: var(--tank); }
+.role-tip-card.role-melee { border-left-color: var(--dps); }
+.role-tip-card.role-ranged { border-left-color: var(--info); }
+.role-tip-card.role-heal { border-left-color: var(--healer); }
+.role-tip-head {
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 10px; padding-bottom: 8px;
+  border-bottom: 1px dashed var(--border);
+  font-family: 'Cinzel', serif;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: 600;
+}
+.role-tip-card.role-tank .role-tip-head { color: var(--tank); }
+.role-tip-card.role-melee .role-tip-head { color: var(--dps); }
+.role-tip-card.role-ranged .role-tip-head { color: var(--info); }
+.role-tip-card.role-heal .role-tip-head { color: var(--healer); }
+.role-icon { font-size: 14px; }
+.role-tip-card ul { padding-left: 18px; margin: 0; }
+.role-tip-card li {
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.role-tip-card.role-tank li::marker { color: var(--tank); }
+.role-tip-card.role-melee li::marker { color: var(--dps); }
+.role-tip-card.role-ranged li::marker { color: var(--info); }
+.role-tip-card.role-heal li::marker { color: var(--healer); }
+.role-tip-card li b,
+.role-tip-card li strong { color: var(--gold); font-weight: 600; }
+.role-tip-card li em { color: var(--text); font-style: italic; font-weight: 500; }
+
 /* Pro tip callout */
 .callout {
   margin: 22px 0 6px;

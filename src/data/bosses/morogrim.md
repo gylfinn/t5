@@ -14,34 +14,36 @@ stats:
   - { k: Tankar, v: "2" }
   - { k: Resistance, v: "Engin" }
   - { k: Bardagatími, v: "~6 mín" }
+tldr:
+  - "Frontal cone, ekki standa fyrir framan boss"
+  - "Healer assigned á Watery Graves i miðjunni"
+  - "Á 25% byrjar Earthquake — <b>Bloodlust og burn</b>"
 mechanics:
   - role: move
     name: Tidal Wave
-    text: "Frontal cone. Allir framan á MUST forðast eða vera melee á hliðum."
+    text: "Frontal cone, ekki standa fyrir framan boss"
   - role: raid
     name: Watery Grave
-    text: "4 random raid members teleportast í pollum á jörðinni — föst í 6 sek og taka skaða."
+    text: "4 random raid members teleportast í polla — fastir í 6 sek og taka skaða."
   - role: raid
     name: Earthquake (25%)
     text: "Continuous AoE skaði á alla."
   - role: adds
     name: Tidewalker Lurkers
     text: "Á 75%, 50%, 25% spawnast hópur af murloc adds."
-strategy: "Tankurinn heldur Morogrim í einum stað. Allir aðrir standa á sínum spot — pre-assigned. Þegar Watery Grave virkjar, healers heala 4 sem eru í pollunum. Murloc waves — off-tank grípur, AoE niður (Mage Frost Nova / Warlock Seed of Corruption / Hunter Multi-Shot er gulls ígildi). Á 25% byrjar Earthquake — burn fast með Bloodlust."
+strategy: "Tankurinn heldur Morogrim í einum stað. Allir aðrir standa fyrir aftan. Murloc waves — off-tank grípur, AoE niður (Boomkin Hurricane / Hunter Volley er best). Á 25% byrjar Earthquake — Bloodlust."
 keyPoints:
-  - "Allir hafa sinn spot — ekki standa á öðrum"
-  - "Watery Grave skaði stackast — heal hratt"
-  - "AoE classes lykill á add waves"
-  - "Save Bloodlust á 25% Earthquake phase"
+  - "Heala Watery Graves targets"
+  - "Leyfa Paladin tank að grípa murlocs"
+  - "Save Bloodlust á 25% Earthquake phase" 
 tactics:
   - "<b>1-2 healers</b> assignaðir á Watery Grave (heala 4 í pollunum)."
-  - "<b>Eftir Earthquake</b> koma alltaf murlocs sitthvorum megin — pre-assigna addid á off-tank."
+  - "<b>Eftir Earthquake</b> koma alltaf murlocs sitthvorum megin"
+  - "<b>Holy Lights á warlock:</b> Paladin tank getur castað Holy Lights á warlock fyrir solid initial AoE threat."
   - "<b>Bara heala tanks</b> eftir earthquake; má heala raid þegar threat á adds er gott."
-  - "<b>Ele shaman kitear Strider</b> ef hann spawnar í þessum slag (Vashj prep)."
-  - "<b>Holy Lights á warlock:</b> ármann getur castað Holy Lights á warlock fyrir solid initial AoE threat."
-  - "<b>Add grab:</b> Gústi grabbar adds frá entrance, fer með þá í rassinn á boss og AoE."
-  - "<b>Spriest MCar</b> murloc fyrir debuff á boss."
-  - "<em>Mikið tank dmg — healing cooldowns roteraðir á main tank.</em>"
+  - "<b>Add grab:</b> 3rd Tank focusar adds frá entrance, fer með þá til paladin og AoE."
+  - "(Pre-Nerf ability)<s><b>Spriest MCar</b> murloc fyrir debuff á boss.</s>"
+  - "<em>Mikið tank dmg</em>"
 ---
 
-Tank-and-spank með murloc-add fasa og Watery Grave mechanic. AoE klassar fá að skína hér.
+Morogrim bauð allri murloc-fjölskyldunni í kvöldverð og Hitaveitan er aðalrétturinn. Á 25% mætir hann svo þreyttur á gestunum að hann hristir herbergið með Earthquake bara til að halda sér vakandi.

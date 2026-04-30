@@ -6,7 +6,7 @@ name: The Lurker Below
 tocLabel: Lurker
 tagline: "Veiðiboss — Cast bobber to start"
 portrait: "/images/bosses/portraits/lurker.jpg"
-difficulty: 3
+difficulty: 2
 stats:
   - { k: HP, v: "~3M" }
   - { k: Tegund, v: "Beast" }
@@ -14,6 +14,10 @@ stats:
   - { k: Tankar, v: "2" }
   - { k: Trigger, v: "Veiðing í polli" }
   - { k: Bardagatími, v: "~7 mín" }
+tldr:
+  - "Spout = <b>STÖKKVA Í VATNIÐ</b>. Engin undantekning. (eða hlaupa 380° ef þér finnst það skemmtilegra)"
+  - "Whirl kemur eftir Spout — bíða í vatninu áður en þú klifrar upp"
+  - "Submerge: tankar grípa adds á þremur platformum"
 mechanics:
   - role: move
     name: Spout
@@ -26,11 +30,11 @@ mechanics:
     text: "Random target, mikill skaði og knockback."
   - role: adds
     name: Submerge (90 sek)
-    text: "Lurker köfar og 3 hópar af adds spawnast (Coilfang Ambushers og Guardians)."
+    text: "Lurker leggur sig og 3 hópar af adds spawnast (Coilfang Ambushers og Guardians)."
 phases:
   - num: "Pull"
     name: "Veiðing"
-    text: "Einhver veiðir í miðjupollinum. Þetta tekur 10-30 sek (random) — Lurker birtist svo úr vatninu."
+    text: "Einhver veiðir í miðjupollinum, rest fær sér einn ískaldan á meðan. Þetta tekur 10-30 sek (random) — Lurker birtist svo úr vatninu."
   - num: "Phase 1"
     name: "Lurker á yfirborði"
     text: "Tankurinn stendur á aðalplatformunni. Melee dpsar. Ranged stendur á hliðar-platformunum. Þegar Spout byrjar — STÖKKVA Í VATNIÐ. Þegar Spout er búinn, klifruðu upp aftur."
@@ -40,12 +44,11 @@ phases:
       caption: "<b>Phase 1 setup:</b> tank á aðalplatformi með heal teams sitthvorum megin. Mages sheepa adds í horninu. Death Coil punktur fyrir warlocks."
   - num: "Phase 2"
     name: "Submerge"
-    text: "Lurker köfar. Adds spawnast á þremur platformum. Off-tank og main tank skipta sér. Healers fylgja tönkum. Drepið alla adds áður en Lurker birtist aftur."
+    text: "Lurker leggur sig. Adds spawnast á þremur platformum. Off-tank og main tank skipta sér. Healers fylgja tönkum. Drepið alla adds áður en Lurker birtist aftur."
 keyPoints:
-  - "Spout = stökk eða dauður"
-  - "Healers sem leyfa raid að ná Whirl drepa raid"
-  - "Tank assignment á submerge phase er lykill"
+  - "Spout = kafa eða hlaupa"
   - "Sá sem veiðir á að vera einhver með veiðiskill"
+  - "Muna að taka svo af sér veiðistöngina þegar Lurker mætir."
 tactics:
   - "<b>CC-a vinstri add</b>, drepa hægri svo vinstri, hjálpa svo með tank-add."
   - "<b>Spoutið er ca 375 gráður</b> — engin örugg position á platformunum, þú VERÐUR að stökkva."
@@ -53,4 +56,4 @@ tactics:
   - "<b>Eftir hvert einasta Spout</b> kemur Whirlwind — melee bíða alltaf eftir því áður en þeir klifra upp."
 ---
 
-Skrítinn fishing-boss — þú byrjar bardagann með því að kasta veiðistöng í pollinn í miðjunni. Spout er signature mechanic þessa boss og einn af ólíklegustu hlutum í WoW.
+Bardaginn hefst þegar einhver úr Hitaveitunni veiðir í pollinum eins og þetta sé helgarferð á Þingvöll. Lurker birtist þegar honum hentar, gerir Spout sem nær einhvern veginn 375 gráðum af 360 mögulegum, og refsar öllum sem treystu platformnum sínum.

@@ -1,12 +1,13 @@
 ---
 interface Props {
   level: number;
+  compact?: boolean;
 }
-const { level } = Astro.props;
+const { level, compact = false } = Astro.props;
 const skulls = [1, 2, 3, 4, 5];
 ---
-<div class="difficulty">
-  <span class="lbl">Erfiðleiki</span>
+<div class:list={['difficulty', compact && 'difficulty-compact']}>
+  {!compact && <span class="lbl">Erfiðleiki</span>}
   <span class="skulls">
     {skulls.map(i => (
       <span class={`skull${i <= level ? ' on' : ''}`}></span>

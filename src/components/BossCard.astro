@@ -44,6 +44,15 @@ const portraitUrl = boss.data.portrait
     </aside>
 
     <div class="content">
+      {boss.data.tldr && boss.data.tldr.length > 0 && (
+        <div class="tldr">
+          <div class="head">⚡ Á einum andardrætti</div>
+          <ol>
+            {boss.data.tldr.map(item => <li set:html={item} />)}
+          </ol>
+        </div>
+      )}
+
       <Content />
 
       {boss.data.images?.map(img => (
@@ -83,6 +92,29 @@ const portraitUrl = boss.data.portrait
             {boss.data.tactics.map(t => <li set:html={t} />)}
           </ul>
         </div>
+      )}
+
+      {boss.data.roleTips && boss.data.roleTips.length > 0 && (
+        <>
+          <h4>Tips eftir hlutverki</h4>
+          <div class="role-tips">
+            {boss.data.roleTips.map(group => {
+              const labels = { tank: 'Tankar', melee: 'Melee', ranged: 'Ranged', heal: 'Healers' };
+              const icons = { tank: '🛡', melee: '⚔', ranged: '🏹', heal: '✚' };
+              return (
+                <div class:list={['role-tip-card', `role-${group.role}`]}>
+                  <div class="role-tip-head">
+                    <span class="role-icon">{icons[group.role]}</span>
+                    <span class="role-label">{labels[group.role]}</span>
+                  </div>
+                  <ul>
+                    {group.tips.map(t => <li set:html={t} />)}
+                  </ul>
+                </div>
+              );
+            })}
+          </div>
+        </>
       )}
 
       <div class="callout">

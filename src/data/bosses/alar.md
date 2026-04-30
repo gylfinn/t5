@@ -13,6 +13,10 @@ stats:
   - { k: Tankar, v: "3" }
   - { k: Resistance, v: "Engin" }
   - { k: Bardagatími, v: "~7 mín" }
+tldr:
+  - "Tank-swap þegar Al'ar flýgur til næstu platformu — fylgdu honum"
+  - "Allir hoppa <b>NIÐUR</b> á Flame Quills <em>og</em> þegar hann deyr í Fasa 1"
+  - "Paladin tekur Embers og dregur þá frá raidinu áður en þeir springa"
 mechanics:
   - role: raid
     name: Flame Quills
@@ -25,7 +29,7 @@ mechanics:
     text: "Stakkast á tankinn á meðan Al'ar er á jörðinni, tank swap."
   - role: raid
     name: Dive Bomb (Fasi 2)
-    text: "Stór skaði sem dreifist á alla — stakka saman og svo spread þegar það er búið."
+    text: "Stór skaði sem dreifist á alla — Spreada"
 phases:
   - num: "Fasi 1"
     name: "100% → fyrsta dauða"
@@ -37,7 +41,7 @@ phases:
       Á 0% HP í Fasa 1 <em>springur Al'ar á platformunni</em> með stóru AoE — <b>allir melee verða að hoppa niður áður en hann deyr</b>, annars deyja þeir í explosion-inu. Eftir það fellur hann og Fasi 2 byrjar.
   - num: "Fasi 2"
     name: "Eftir endurupprisu"
-    text: "Al'ar er á jörðinni allan tímann. Tankurinn heldur honum í miðjunni. Embers spawnast reglulega — annar tank tekur þá og dregur úr raidinu áður en þeir springa. Eftir Dive Bomb: stakka saman, svo dreifist út og healers skipta súpunni. Burn niður þangað til hann er dauður."
+    text: "Al'ar er á jörðinni allan tímann. Tankurinn heldur honum í miðjunni. Embers spawnast reglulega — annar tank tekur þá og dregur úr raidinu áður en þeir springa. Allir létt spreada fyrir Dive Bomb. Burn niður þangað til hann er dauður."
 keyPoints:
   - "Þrír tankar nauðsynlegir — 2 fyrir platform-skipti í Fasa 1, + 1 á Embers. Í Fasa 2 swappa tankar á Melt Armor stacks."
   - "Healers þurfa að gripa Dive Bomb skaða með cooldowns"
@@ -48,7 +52,7 @@ tactics:
   - "Fyrir <b>Flame Quill:</b> allir hoppa niður — hann ætti svo að lenda á platform 2 eða 5."
   - "<b>Paladin tank</b> pickar upp Embers; ef tankinn höndlar marga adds eru þeir geymdir fyrir P2 transition."
   - "<b>Fasi 2:</b> spreada út, tankar taunta á debuffum, paladin tankar adds sem koma úr Dive Bomb."
-  - "<b>Dive Bomb</b> — hugga og spreada svo ASAP. Healthstone á fyrsta, snake trap á öll næstu."
+  - "<b>Dive Bomb</b> — (Post-nerf)Þá spreada allir. <s>(Pre-Nerf) Þá hugga og spreada svo ASAP. Healthstone á fyrsta, snake trap á öll næstu.</s>"
   - "<b>PTR observation:</b> hann fer 1 til vinstri eða 1 til hægri; ef hann fer akkúrat hinum megin þá spawnar hann adds."
   - "<em>Hlaupa úr eldi ASAP, please.</em>"
 images:
@@ -57,4 +61,4 @@ images:
     caption: "<b>Platform layout:</b> Al'ar lendir á einni platformu og fer svo random — annaðhvort til vinstri, til hægri, eða beint yfir í hina hliðina (1↔4, 2↔5, 3↔6)."
 ---
 
-Al'ar er stór fönix sem flýgur á milli fjögurra platforma í herberginu. Bardaginn er í tveimur fösum og krefst mikillar hreyfingar. Þetta er fyrsti boss þar sem positioning og tank-swap koordinasjón skiptir öllu.
+Endurfæðing er Al'ars uppáhalds-hobbí — sem þýðir að Hitaveitan þarf að drepa hann tvisvar á sama kvöldi. Hann lendir random á sex platformum og springur þegar hann fellur í Fasa 1; melee sem hoppar ekki niður í tíma fær brennandi kennslu í lóðréttri hreyfingu.

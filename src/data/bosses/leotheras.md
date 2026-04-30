@@ -6,7 +6,7 @@ name: Leotheras the Blind
 tocLabel: Leotheras
 tagline: "Demon/Elf hybrid — Inner Demons"
 portrait: "/images/bosses/portraits/leotheras.jpg"
-difficulty: 4
+difficulty: 3
 stats:
   - { k: HP, v: "~2.5M" }
   - { k: Tegund, v: "Demon/Elf" }
@@ -14,13 +14,17 @@ stats:
   - { k: Tankar, v: "Warrior + Warlock" }
   - { k: Resistance, v: "Engin" }
   - { k: Bardagatími, v: "~8 mín" }
+tldr:
+  - "Whirlwind = <b>HLAUPA BURT</b> ASAP"
+  - "Inner Demon: drepa eigin demon á 60 sek annars MC"
+  - "Threat reset við hverja form-skiptingu — tankar taunta"
 mechanics:
   - role: move
     name: Whirlwind (Elf)
-    text: "Whirlwindar í 10 sek og hreyfir sig random. Hlauptu frá honum."
-  - role: raid
+    text: "Whirlwindar í 10 sek og hreyfir sig random. Hlauptu frá honum. Aggro resetar í lokin"
+  - role: tank
     name: Chaos Blast (Demon)
-    text: "Casttast á random target, ~5k shadow skaði."
+    text: "Castar á targetið með threat, Fire dmg"
   - role: adds
     name: Inner Demon
     text: "5 random raid members fá Insidious Whisper. Hver klónast í demon sem þú þarft að drepa á 60 sek annars MC."
@@ -35,16 +39,15 @@ phases:
     name: "15% — Final form"
     text: "Á 15% kemur Final Form (mixed) — burn niður með Bloodlust."
 keyPoints:
-  - "Warlock með Soul Link er kleinpunktur fyrir Phase 2"
-  - "Inner Demons skiptast á alla — allir verða að geta DPSað eigin demon"
-  - "Tank swap milli phases er nauðsyn"
+  - "Healers geta fengið Inner Demon, þurfa að geta dpsað addinn sinn á 60sec"
+  - "Passa threat þegar hann skiptist um phase"
   - "Whirlwind = hlaupa eða dauður"
 tactics:
-  - "<b>THREAT DROP</b> eftir hvert einasta Whirlwind — tankur verður að taunta strax aftur."
+  - "<b>THREAT DROP</b> eftir hvert einasta Whirlwind — tankur verður að grípa hann strax aftur."
   - "<b>THREAT DROP</b> þegar hann fer í Demon phase."
   - "<b>THREAT DROP</b> þegar hann fer í Human phase aftur."
-  - "<b>Random fólk fær Shadow-Demon</b> — aðeins manneskjan með drauginn á sér getur drepið hann."
-  - "<b>Ekki standa nálægt lock-tank</b> í Demon phase (Chaos Blast splash)."
+  - "<b>Random fólk fær inner-Demon</b> — aðeins manneskjan með drauginn á sér getur drepið hann."
+  - "<b>Ekki standa nálægt tank</b> í Demon phase (Chaos Blast splash)."
 ---
 
-Þessi gerir mismunandi hluti eftir form. Skiptist í Elf-form og Demon-form. Krefst <em>warlock-tank</em> sem er sjaldan séð í raidum.
+Leotheras getur ekki ákveðið hvort hann sé álfur eða púki, svo hann er bara báðir til skiptis og lætur Hitaveituna velja. Krefst warlock-tanks sem áður svaf á sófanum með Drain Soul í gangi — núna er hann allt í einu hetja kvöldsins.

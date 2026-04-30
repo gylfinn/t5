@@ -24,6 +24,7 @@ const bosses = defineCollection({
       k: z.string(),
       v: z.string(),
     })),
+    tldr: z.array(z.string()).min(2).max(4).optional(),
     images: z.array(figure).optional(),
     mechanicsHeading: z.string().optional(),
     mechanics: z.array(z.object({
@@ -40,6 +41,10 @@ const bosses = defineCollection({
     })).optional(),
     strategy: z.string().optional(),
     tactics: z.array(z.string()).optional(),
+    roleTips: z.array(z.object({
+      role: z.enum(['tank', 'melee', 'ranged', 'heal']),
+      tips: z.array(z.string()),
+    })).optional(),
     keyPoints: z.array(z.string()),
     loot: z.string().optional(),
   }),

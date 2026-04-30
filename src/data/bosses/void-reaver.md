@@ -6,7 +6,7 @@ name: Void Reaver
 tocLabel: Void Reaver
 tagline: '"Loot Piñata" — auðveldasti boss í T5'
 portrait: "/images/bosses/portraits/void-reaver.jpg"
-difficulty: 2
+difficulty: 1
 stats:
   - { k: HP, v: "~4M" }
   - { k: Tegund, v: "Construct" }
@@ -14,6 +14,9 @@ stats:
   - { k: Tankar, v: "1" }
   - { k: Berserk, v: "10 mín" }
   - { k: Bardagatími, v: "~5 mín" }
+tldr:
+  - "Raidið stackar fyrir aftan boss; 3-4 ranged(Hunters) spreada fyrir Arcane Orb"
+  - "Passa threat"
 mechanics:
   - role: raid
     name: Pounding
@@ -23,10 +26,10 @@ mechanics:
     text: "Skítur orbum á 3 random ranged. Orbinn ferðast hægt — stígðu úr veginum, mikill skaði ef hann hittir."
   - role: tank
     name: Knock Away
-    text: "Knockback og threat reduction. Tankurinn þarf að taunta strax aftur."
+    text: "Knockback + threat reduction. <b>Taunt-immune</b> — tank verður að byggja threat upp aftur með skills/abilities, ekki taunt."
 strategy: "Raidið stackar fyrir aftan boss í melee. 3-4 ranged (Hunters) spreada í hring í kringum boss og soaka Arcane Orbs."
 keyPoints:
   - "Threat hjá tank lækkar reglulega — threat management er lykill."
 ---
 
-Einfaldasti bossinn í The Eye — oft kallaður "loot piñata". Tank-and-spank með nokkrum mechanics. Frábær fyrsti kill fyrir guild sem er nýtt í The Eye.
+Void Reaver er málmkista með fótum sem Hitaveitan opnar á fimm mínútum og er komin heim í kvöldmat áður en Pounding nær öðrum stack. Eini bossinn í The Eye sem deyr án þess að krefjast Discord-fundar daginn eftir.
