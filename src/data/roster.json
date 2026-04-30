@@ -7,7 +7,8 @@
     "role": "tank",
     "spec": "Feral",
     "race": "Tauren",
-    "avatar": "/images/raiders/druid.png"
+    "avatar": "/images/raiders/druid.png",
+    "logsUrl": "https://fresh.warcraftlogs.com/character/id/106206923"
   },
   {
     "id": "kusknafli",
@@ -17,7 +18,8 @@
     "role": "tank",
     "spec": "Protection",
     "race": "Blood Elf",
-    "avatar": "/images/raiders/paladin.png"
+    "avatar": "/images/raiders/paladin.png",
+    "logsUrl": "https://fresh.warcraftlogs.com/character/id/106445279"
   },
   {
     "id": "froozh",
@@ -27,7 +29,8 @@
     "role": "heal",
     "spec": "Restoration",
     "race": "Tauren",
-    "avatar": "/images/raiders/druid.png"
+    "avatar": "/images/raiders/druid.png",
+    "logsUrl": "https://fresh.warcraftlogs.com/character/id/106323878"
   },
   {
     "id": "nony",
@@ -37,7 +40,8 @@
     "role": "heal",
     "spec": "Discipline",
     "race": "Blood Elf",
-    "avatar": "/images/raiders/priest.png"
+    "avatar": "/images/raiders/priest.png",
+    "logsUrl": "https://fresh.warcraftlogs.com/character/id/106404332"
   },
   {
     "id": "skarphedinn",
@@ -48,7 +52,8 @@
     "spec": "Retribution",
     "race": "Blood Elf",
     "notes": "Blessup lads",
-    "avatar": "/images/raiders/paladin.png"
+    "avatar": "/images/raiders/paladin.png",
+    "logsUrl": "https://fresh.warcraftlogs.com/character/id/106206926"
   },
   {
     "id": "vonweirdo",
@@ -58,7 +63,8 @@
     "role": "ranged",
     "spec": "Destruction",
     "race": "Orc",
-    "avatar": "/images/raiders/warlock.png"
+    "avatar": "/images/raiders/warlock.png",
+    "logsUrl": "https://fresh.warcraftlogs.com/character/id/106206917"
   },
   {
     "id": "allz",
@@ -68,7 +74,8 @@
     "role": "ranged",
     "spec": "Fire",
     "race": "Blood Elf",
-    "avatar": "/images/raiders/mage.png"
+    "avatar": "/images/raiders/mage.png",
+    "logsUrl": "https://fresh.warcraftlogs.com/character/EU/Spineshatter/Spaug"
   },
   {
     "id": "kiobriggs",
@@ -79,7 +86,8 @@
     "spec": "Beast Mastery",
     "race": "Orc",
     "notes": "Meter padder",
-    "avatar": "/images/raiders/hunter.png"
+    "avatar": "/images/raiders/hunter.png",
+    "logsUrl": "https://fresh.warcraftlogs.com/character/id/106404330"
   },
   {
     "id": "furnity",
@@ -90,7 +98,8 @@
     "spec": "Balance",
     "race": "Tauren",
     "notes": "Huge Pumper",
-    "avatar": "/images/raiders/druid.png"
+    "avatar": "/images/raiders/druid.png",
+    "logsUrl": "https://fresh.warcraftlogs.com/character/id/107481142"
   },
   {
     "id": "fnrx",
@@ -100,7 +109,8 @@
     "role": "heal",
     "spec": "Resto",
     "race": "Orc",
-    "avatar": "/images/raiders/shaman.png"
+    "avatar": "/images/raiders/shaman.png",
+    "logsUrl": "https://fresh.warcraftlogs.com/character/EU/Spineshatter/Fnrx"
   },
   {
     "id": "oskird",
@@ -110,7 +120,8 @@
     "role": "melee",
     "spec": "Combat",
     "race": "Urc",
-    "avatar": "/images/raiders/rogue.png"
+    "avatar": "/images/raiders/rogue.png",
+    "logsUrl": "https://fresh.warcraftlogs.com/character/eu/spineshatter/%c3%93sk%c3%adr%c3%b0"
   },
   {
     "id": "ofermd",
@@ -120,6 +131,7 @@
     "role": "melee",
     "spec": "Assassination",
     "race": "Undead",
-    "avatar": "/images/raiders/rogue.png"
+    "avatar": "/images/raiders/rogue.png",
+    "logsUrl": "https://fresh.warcraftlogs.com/character/eu/spineshatter/%C3%93fermd"
   }
 ]

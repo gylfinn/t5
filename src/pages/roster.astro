@@ -56,29 +56,39 @@ const total = raiders.length;
           <span class="roster-section-count">{byRole[role].length}</span>
         </header>
         <div class="roster-grid">
-          {byRole[role].map(r => (
-            <article class="raider-card" data-class={r.data.class.toLowerCase()}>
-              <div class:list={['raider-icon', r.data.avatar && 'has-avatar']} aria-hidden="true">
-                {r.data.avatar ? (
-                  <img src={avatarUrl(r.data.avatar)} alt="" loading="lazy" decoding="async" />
-                ) : (
-                  <span class="raider-icon-letter">{r.data.class.charAt(0)}</span>
-                )}
-              </div>
-              <div class="raider-titles">
-                <h3 class="raider-character">{r.data.character}</h3>
-                <div class="raider-player">{r.data.player}</div>
-              </div>
-              <div class="raider-meta">
-                <span class="raider-class">{r.data.class}</span>
-                {r.data.spec && <span class="raider-dot" aria-hidden="true">·</span>}
-                {r.data.spec && <span class="raider-spec">{r.data.spec}</span>}
-                {r.data.race && <span class="raider-dot" aria-hidden="true">·</span>}
-                {r.data.race && <span class="raider-race">{r.data.race}</span>}
-              </div>
-              {r.data.notes && <p class="raider-notes">{r.data.notes}</p>}
-            </article>
-          ))}
+          {byRole[role].map(r => {
+            const Tag = (r.data.logsUrl ? 'a' : 'article') as 'a' | 'article';
+            const linkProps = r.data.logsUrl
+              ? { href: r.data.logsUrl, target: '_blank', rel: 'noopener noreferrer', 'aria-label': `${r.data.character} á Warcraft Logs` }
+              : {};
+            return (
+              <Tag
+                class:list={['raider-card', r.data.logsUrl && 'is-link']}
+                data-class={r.data.class.toLowerCase()}
+                {...linkProps}
+              >
+                <div class:list={['raider-icon', r.data.avatar && 'has-avatar']} aria-hidden="true">
+                  {r.data.avatar ? (
+                    <img src={avatarUrl(r.data.avatar)} alt="" loading="lazy" decoding="async" />
+                  ) : (
+                    <span class="raider-icon-letter">{r.data.class.charAt(0)}</span>
+                  )}
+                </div>
+                <div class="raider-titles">
+                  <h3 class="raider-character">{r.data.character}</h3>
+                  <div class="raider-player">{r.data.player}</div>
+                </div>
+                <div class="raider-meta">
+                  <span class="raider-class">{r.data.class}</span>
+                  {r.data.spec && <span class="raider-dot" aria-hidden="true">·</span>}
+                  {r.data.spec && <span class="raider-spec">{r.data.spec}</span>}
+                  {r.data.race && <span class="raider-dot" aria-hidden="true">·</span>}
+                  {r.data.race && <span class="raider-race">{r.data.race}</span>}
+                </div>
+                {r.data.notes && <p class="raider-notes">{r.data.notes}</p>}
+              </Tag>
+            );
+          })}
         </div>
       </section>
     ))}
@@ -190,6 +200,32 @@ const total = raiders.length;
   .raider-card:hover {
     transform: translateY(-2px);
     box-shadow: 0 12px 26px -16px rgba(0, 0, 0, 0.5);
+  }
+  /* Linkable cards (logsUrl present) — render as anchor with subtle ↗ hint */
+  a.raider-card {
+    color: inherit;
+    text-decoration: none;
+  }
+  .raider-card.is-link {
+    cursor: pointer;
+    position: relative;
+  }
+  .raider-card.is-link::after {
+    content: '↗';
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--gold-dim);
+    opacity: 0.55;
+    transition: opacity 0.2s, color 0.2s, transform 0.2s;
+    line-height: 1;
+  }
+  .raider-card.is-link:hover::after {
+    opacity: 1;
+    color: var(--gold);
+    transform: translate(2px, -2px);
   }
   .raider-icon {
     grid-area: icon;

@@ -79,6 +79,7 @@ const raiders = defineCollection({
     race: z.string().optional(),
     notes: z.string().optional(),
     avatar: z.string().optional(),
+    logsUrl: z.string().url().optional(),
   }),
 });
 
