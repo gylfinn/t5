@@ -64,7 +64,7 @@ phases:
 
       Focus order: Staff/Bow fyrst → Cosmic Infuser → restin → Phaseshift Bulwark síðast (en samt áður en Fasi 3 endar — MT þarf hann). Allir loota það vopn sem hentar þeirra hlutverki: <em>melee → Infinity Blade</em>, <em>healers → Cosmic Infuser</em>, <em>MT → Phaseshift Bulwark</em>.
   - num: "Fasi 3"
-    name: "Allir Advisors aftur sem ghosts"
+    name: "Advisors spawna allir í einu"
     text: |
       2 mín eftir vopn rísa allir 4 advisors upp samtímis á þeirra dauðastað. Tankar í position fyrirfram, healers pre-assignaðir á hvern tank.
 
