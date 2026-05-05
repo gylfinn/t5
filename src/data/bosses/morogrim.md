@@ -31,7 +31,7 @@ mechanics:
   - role: adds
     name: Tidewalker Lurkers
     text: "Á 75%, 50%, 25% spawnast hópur af murloc adds."
-strategy: "Tankurinn heldur Morogrim í einum stað. Allir aðrir standa fyrir aftan. Murloc waves — off-tank grípur, AoE niður (Boomkin Hurricane / Hunter Volley er best). Á 25% byrjar Earthquake — Bloodlust."
+strategy: "Tankurinn heldur Morogrim á einum stað. Allir aðrir standa fyrir aftan. Murloc waves — off-tank grípur, AoE niður (Boomkin Hurricane / Hunter Volley er best). Á 25% byrjar Earthquake — Bloodlust."
 keyPoints:
   - "Heala Watery Graves targets"
   - "Leyfa Paladin tank að grípa murlocs"
@@ -46,4 +46,4 @@ tactics:
   - "<em>Mikið tank dmg</em>"
 ---
 
-Morogrim bauð allri murloc-fjölskyldunni í kvöldverð og Hitaveitan er aðalrétturinn. Á 25% mætir hann svo þreyttur á gestunum að hann hristir herbergið með Earthquake bara til að halda sér vakandi.
+Morogrim bauð allri murloc-fjölskyldunni í kvöldverð og Hitaveitan er aðalrétturinn. Í 25% þreytist hann á gestunum þannig hann hristir herbergið með Earthquake bara til að halda sér vakandi.

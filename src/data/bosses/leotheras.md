@@ -4,12 +4,12 @@ order: 7
 raid: ssc
 name: Leotheras the Blind
 tocLabel: Leotheras
-tagline: "Demon/Elf hybrid — Inner Demons"
+tagline: "Demon/Human hybrid — Inner Demons"
 portrait: "/images/bosses/portraits/leotheras.jpg"
 difficulty: 3
 stats:
   - { k: HP, v: "~2.5M" }
-  - { k: Tegund, v: "Demon/Elf" }
+  - { k: Tegund, v: "Demon/Human" }
   - { k: Fasar, v: "2 (skipta)" }
   - { k: Tankar, v: "Warrior + Warlock" }
   - { k: Resistance, v: "Engin" }
@@ -20,7 +20,7 @@ tldr:
   - "Threat reset við hverja form-skiptingu — tankar taunta"
 mechanics:
   - role: move
-    name: Whirlwind (Elf)
+    name: Whirlwind (Human)
     text: "Whirlwindar í 10 sek og hreyfir sig random. Hlauptu frá honum. Aggro resetar í lokin"
   - role: tank
     name: Chaos Blast (Demon)
@@ -30,18 +30,18 @@ mechanics:
     text: "5 random raid members fá Insidious Whisper. Hver klónast í demon sem þú þarft að drepa á 60 sek annars MC."
 phases:
   - num: "Phase 1"
-    name: "Elf form"
-    text: "Warrior-tankur tekur Leotheras með Defensive Stance. Hann gerir Whirlwind á random tímum — allir hlaupa BURT. Eftir 60 sek breytist hann í Demon Form."
+    name: "Human form"
+    text: "Hann gerir Whirlwind á random tímum — allir hlaupa BURT. Eftir 60 sek breytist hann í Demon Form."
   - num: "Phase 2"
     name: "Demon form"
-    text: "Warlock-tank (já, warlock með Soul Link og Voidwalker) tekur Demon-form Leotheras. Hann gefur Chaos Blast skaða og 5 manns fá Insidious Whisper. Hver og einn sem fær whisper þarf að DPSa eigin Inner Demon niður á 60 sek. Skiptir aftur í Elf form eftir tíma."
+    text: "Tank með Fire Resistance tekur Demon-form Leotheras. Ekki standa nálægt tankinum. 5 manns fá Insidious Whisper. Hver og einn sem fær whisper þarf að DPSa eigin Inner Demon niður á 60 sek. Skiptir aftur í Human form eftir tíma."
   - num: "Phase 3"
     name: "15% — Final form"
-    text: "Á 15% kemur Final Form (mixed) — burn niður með Bloodlust."
+    text: "Á 15% Splittar hann (bæði form í einu) — burn niður Human form með Bloodlust."
 keyPoints:
   - "Healers geta fengið Inner Demon, þurfa að geta dpsað addinn sinn á 60sec"
   - "Passa threat þegar hann skiptist um phase"
-  - "Whirlwind = hlaupa eða dauður"
+  - "Whirlwind = hlaupa frá"
 tactics:
   - "<b>THREAT DROP</b> eftir hvert einasta Whirlwind — tankur verður að grípa hann strax aftur."
   - "<b>THREAT DROP</b> þegar hann fer í Demon phase."

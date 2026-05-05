@@ -23,11 +23,14 @@ mechanics:
     text: "AoE skaði á alla í raidinu á 12 sek fresti (~1300 skaði). Healers þurfa að halda öllum uppi."
   - role: move
     name: Arcane Orb
-    text: "Skítur orbum á 3 random ranged. Orbinn ferðast hægt — stígðu úr veginum, mikill skaði ef hann hittir."
+    text: "Hendir orbum á 3 random ranged. Orbinn ferðast hægt — stígðu úr veginum, mikill skaði ef hann hittir."
   - role: tank
     name: Knock Away
     text: "Knockback + threat reduction. <b>Taunt-immune</b> — tank verður að byggja threat upp aftur með skills/abilities, ekki taunt."
 strategy: "Raidið stackar fyrir aftan boss í melee. 3-4 ranged (Hunters) spreada í hring í kringum boss og soaka Arcane Orbs."
+tactics:
+  - "Annaðhvort byrjar <b>Druid</b> tank með hann og heldur honum allan tímann eða <b>Pala</b> tank byrjar og druid eltir."
+  - "<b>Hunters</b> geta staðsett sig þannig þeir soaka orbs og eru i range fyrir heals."
 keyPoints:
   - "Threat hjá tank lækkar reglulega — threat management er lykill."
 ---

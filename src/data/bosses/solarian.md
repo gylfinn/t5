@@ -40,14 +40,11 @@ phases:
     text: "Solarian hverfur og Solarium Agents birtast. 20 sec seinna spawna 2 Priest og Boss"
   - num: "Fasi 3"
     name: "Burn — Voidwalker form"
-    text: Hún verður reið. Mikill skaði á tankinn og raidið. Cooldowns út, burn niður.
-      Á 20% breytist Solarian í Voidwalker form og lemur tankinn, castar AoE Fear.
+    text: Hún verður reið. Í 20% breytist Solarian í Voidwalker og lemur tankinn, castar AoE Fear.
       <em>Tank tauntar í 20%.</em>
 keyPoints:
-  - "Wrath markari þarf að hlaupa strax — staðsetning skiptir öllu"
-  - "Off-tank verður að vera tilbúinn í Phase 1 fyrir Solarium Agents"
-  - "Decursive eða svipaður addon hjálpar healers að sjá Wrath strax"
-  - "Save Bloodlust/Heroism í Phase 3"
+  - "Sá sem fær <b>Wrath of the Astromancer</b> verður að hlaupa frá öllum á 6sec"
+  - "Þar sem það er ekkert threat fyrr en í sub 20% þá er best að tanks taunta rétt áður en hún transitionar í Voidwalker"
 tactics:
   - "<b>Wrath debuff</b> — ef þú færð það, hleypuru frá öllum."
   - "Assigna healera á að <b>target-of-target heala</b> — ekkert aggro á boss fyrr en sub-20%."
@@ -55,4 +52,4 @@ tactics:
   - "<b>Add waves:</b> spawna 2 prestar — nukea hægri, HoJ stunna vinstri, kicka heals."
 ---
 
-Solarian eyddi öldum í að lesa stjörnurnar fyrir Kael'thas — samt sá stjörnukortið hennar ekki fyrir 25manna raid sem mætir á föstudagskvöldi. Tveir tankar með Arcane Resistance er allt sem stjörnumerkin þurftu að segja henni.
+Solarian eyddi öldum í að lesa stjörnurnar fyrir Kael'thas — samt sá stjörnukortið hennar ekki fyrir Hitaveitunni.

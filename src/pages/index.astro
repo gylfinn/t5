@@ -16,9 +16,9 @@ const trash = await getCollection('trashGroups');
 const tkTrash = trash.filter(t => t.data.raid === 'tk');
 const sscTrash = trash.filter(t => t.data.raid === 'ssc');
 
-const tkIntro = `The Eye er lúxusvirki <strong>Kael'thas Sunstrider</strong>, svífandi yfir Netherstorm eins og dýrasta Airbnb á öllu Outland. Hitaveitan flýgur upp, drepur þrjá nánustu starfsmenn Sólarprinsins í röð og endar kvöldið með því að taka af honum legendary vopn sem hann eyddi heilli ævi í að safna. Mælt með að byrja á Void Reaver — hann deyr fyrstur og er furðulega ódýr í kennslu.`;
+const tkIntro = `The Eye er lúxusvirki <strong>Kael'thas Sunstrider</strong>, svífandi yfir Netherstorm eins og dýrasta Airbnb á öllu Outland. Hitaveitan flýgur upp, drepur þrjá nánustu starfsmenn Sólarprinsins í röð og endar kvöldið með því að taka af honum legendary vopn sem hann eyddi heilli ævi í að safna.`;
 
-const sscIntro = `SSC er neðanjarðar hellir þar sem <strong>Lady Vashj</strong> hefur byggt sér rakt og lekt virki djúpt undir Zangarmarsh. Sex bossar á leiðinni að henni og hver og einn er ný tegund áreitis fyrir Hitaveituna — frá Hydross sem getur ekki gert upp við sig hvort hann sé Frost eða Nature, yfir í Morogrim sem býður allri murloc-fjölskyldunni í kvöldmat á sama tíma. Vashj og Kael'thas eru gatekeepers; bæði verða að falla áður en Hyjal og Black Temple opnast, sem þýðir að Hitaveitan kemst ekki heim í kvöldmat fyrr en hvort tveggja er dautt.`;
+const sscIntro = `SSC er neðanjarðar hellir þar sem <strong>Lady Vashj</strong> hefur byggt sér rakt virki djúpt undir Zangarmarsh. Fimm bossar á leiðinni að henni og hver og einn er ný tegund áreitis fyrir Hitaveituna — frá Hydross sem getur ekki gert upp við sig hvort hann sé Frost eða Nature, yfir í Morogrim sem býður allri murloc-fjölskyldunni í kvöldmat á sama tíma.`;
 ---
 <Base title="Raid Leiðbeiningar — Tempest Keep & Serpentshrine Cavern | TBC Anniversary">
   <TOC bosses={all} />
@@ -29,7 +29,7 @@ const sscIntro = `SSC er neðanjarðar hellir þar sem <strong>Lady Vashj</stron
       <RaidIntro
         label="Raid · Hluti I"
         title="Tempest Keep: The Eye"
-        meta="Netherstorm · 4 bossar · Attunement: The Eye Attunement"
+        meta="Netherstorm · 4 bossar"
         blurbHtml={tkIntro}
         info={[
           { k: 'Staðsetning', v: 'Netherstorm' },
@@ -46,7 +46,7 @@ const sscIntro = `SSC er neðanjarðar hellir þar sem <strong>Lady Vashj</stron
         <RaidIntro
           label="Raid · Hluti II"
           title="Serpentshrine Cavern"
-          meta="Coilfang Reservoir, Zangarmarsh · 6 bossar · Attunement: The Mark of Vashj"
+          meta="Coilfang Reservoir, Zangarmarsh · 6 bossar"
           blurbHtml={sscIntro}
           info={[
             { k: 'Staðsetning', v: 'Zangarmarsh' },

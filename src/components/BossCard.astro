@@ -46,7 +46,7 @@ const portraitUrl = boss.data.portrait
     <div class="content">
       {boss.data.tldr && boss.data.tldr.length > 0 && (
         <div class="tldr">
-          <div class="head">⚡ Á einum andardrætti</div>
+          <div class="head">⚡ TL;DR</div>
           <ol>
             {boss.data.tldr.map(item => <li set:html={item} />)}
           </ol>
